@@ -1,0 +1,15 @@
+# secrets
+.env
+
+# python
+__pycache__/
+.venv/
+*.db
+.pytest_cache/
+
+# node / frontend build
+node_modules/
+dist/
+
+# macOS
+.DS_Store
