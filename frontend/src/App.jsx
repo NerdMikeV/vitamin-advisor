@@ -283,6 +283,19 @@ export default function App() {
   const [checkProfile, setCheckProfile] = useState({})
   const [checkResult, setCheckResult] = useState(null)
 
+  // Bumped on every reset; used as a key to remount AgentPicker so its internal
+  // search/dose inputs are cleared too (clean slate, no leftover transient state).
+  const [resetNonce, setResetNonce] = useState(0)
+
+  // Clear ALL advisor + checker inputs and results back to a clean slate.
+  const resetAll = () => {
+    setGoals([]); setDiet('omnivore'); setAlcohol('none'); setSun('moderate')
+    setMeds([]); setProfile({}); setLifestyle({}); setPlanResult(null)
+    setStack([]); setCheckProfile({}); setCheckResult(null)
+    setError(null)
+    setResetNonce((n) => n + 1)
+  }
+
   // Translate lifestyle toggles into survey gate fields + engine profile flags.
   const lifestyleSurvey = (ls) => {
     const out = {}
@@ -320,8 +333,8 @@ export default function App() {
   }
 
   const loadScenario = async (s) => {
+    resetAll()                 // wipe everything first, then apply only this scenario
     setMode(s.mode)
-    setPlanResult(null); setCheckResult(null)
     if (s.mode === 'checker') {
       setStack(s.agents)
       setCheckProfile(s.profile)
@@ -333,6 +346,12 @@ export default function App() {
       setBusy(true)
       try { setPlanResult(await postPlan(s.survey)) } finally { setBusy(false) }
     }
+  }
+
+  const switchMode = (m) => {
+    if (m === mode) return
+    resetAll()                 // clear transient inputs/results when changing modes
+    setMode(m)
   }
 
   const toggle = (list, setList, id) => setList(list.includes(id) ? list.filter((x) => x !== id) : [...list, id])
@@ -349,8 +368,8 @@ export default function App() {
           ))}
         </div>
         <nav>
-          <button className={mode === 'advisor' ? 'active' : ''} onClick={() => setMode('advisor')}>Build my plan</button>
-          <button className={mode === 'checker' ? 'active' : ''} onClick={() => setMode('checker')}>Check my stack</button>
+          <button className={mode === 'advisor' ? 'active' : ''} onClick={() => switchMode('advisor')}>Build my plan</button>
+          <button className={mode === 'checker' ? 'active' : ''} onClick={() => switchMode('checker')}>Check my stack</button>
         </nav>
       </header>
 
@@ -365,7 +384,7 @@ export default function App() {
                 <button key={g.id} className={`chip ${goals.includes(g.id) ? 'on' : ''}`} onClick={() => toggle(goals, setGoals, g.id)}>{g.label}</button>
               ))}
             </div>
-            <h2>2 · Lifestyle</h2>
+            <h2>2 · Lifestyle &amp; products you use</h2>
             <div className="selects">
               <label>Diet
                 <select value={diet} onChange={(e) => setDiet(e.target.value)}>
@@ -389,8 +408,13 @@ export default function App() {
                 </select>
               </label>
             </div>
+            <div className="chips">
+              {LIFESTYLE.map((l) => (
+                <button key={l.id} className={`chip ${lifestyle[l.id] ? 'on' : ''}`} onClick={() => setLifestyle({ ...lifestyle, [l.id]: !lifestyle[l.id] })}>{l.label}</button>
+              ))}
+            </div>
             <h2>3 · Medications you take</h2>
-            <AgentPicker entities={entities.filter((e) => e.entity_type !== 'food')} onAdd={(a) => setMeds([...meds, a])} />
+            <AgentPicker key={`meds-${resetNonce}`} entities={entities.filter((e) => e.entity_type !== 'food')} onAdd={(a) => setMeds([...meds, a])} />
             <div className="chips">
               {meds.map((m, i) => (
                 <button key={i} className="chip on" onClick={() => setMeds(meds.filter((_, j) => j !== i))}>
@@ -398,13 +422,7 @@ export default function App() {
                 </button>
               ))}
             </div>
-            <h2>4 · Lifestyle &amp; products you use</h2>
-            <div className="chips">
-              {LIFESTYLE.map((l) => (
-                <button key={l.id} className={`chip ${lifestyle[l.id] ? 'on' : ''}`} onClick={() => setLifestyle({ ...lifestyle, [l.id]: !lifestyle[l.id] })}>{l.label}</button>
-              ))}
-            </div>
-            <h2>5 · Anything that applies?</h2>
+            <h2>4 · Anything that applies?</h2>
             <div className="chips">
               {PROFILE_FLAGS.map((p) => (
                 <button key={p.id} className={`chip ${profile[p.id] ? 'on' : ''}`} onClick={() => setProfile({ ...profile, [p.id]: !profile[p.id] })}>{p.label}</button>
@@ -433,7 +451,7 @@ export default function App() {
           <div className="quiz">
             <h2>What's in your stack?</h2>
             <p className="muted">Add the supplements you take or plan to buy, plus your medications.</p>
-            <AgentPicker entities={entities} onAdd={(a) => setStack([...stack, a])} />
+            <AgentPicker key={`stack-${resetNonce}`} entities={entities} onAdd={(a) => setStack([...stack, a])} />
             <div className="chips">
               {stack.map((m, i) => (
                 <button key={i} className="chip on" onClick={() => setStack(stack.filter((_, j) => j !== i))}>
