@@ -10,6 +10,10 @@ from .evaluator import evaluate
 SCALAR_FIELDS = ("diet", "alcohol", "sun")
 
 
+# Lifestyle gate triggers carried verbatim from the survey (match survey_rule rows).
+LIFESTYLE_FIELDS = ("smoking_status", "uses_cbd", "uses_cannabis", "uses_glp1", "upcoming_bloodwork")
+
+
 def _trigger_values(survey: dict) -> list[tuple[str, str]]:
     pairs = []
     for goal in survey.get("goals", []):
@@ -17,6 +21,12 @@ def _trigger_values(survey: dict) -> list[tuple[str, str]]:
     for field in SCALAR_FIELDS:
         if survey.get(field):
             pairs.append((field, survey[field]))
+    for field in LIFESTYLE_FIELDS:
+        if survey.get(field):
+            pairs.append((field, survey[field]))
+    # One alcohol selector feeds both the legacy 'alcohol' rule and the new 'alcohol_use' gate.
+    if survey.get("alcohol"):
+        pairs.append(("alcohol_use", survey["alcohol"]))
     for med in survey.get("meds", []):
         pairs.append(("med", med["entity_id"]))
     return pairs
@@ -49,24 +59,36 @@ def build_plan(survey: dict, conn) -> dict:
                     "evidence_grade": rule["evidence_grade"],
                     "source_ref": rule["source_ref"],
                 })
-            elif rule["action"] == "gate":
+            elif rule["action"] in ("gate", "suppress", "space"):
+                # All three are "flag/route" actions in this dataset: pull a
+                # recommended entity if present, else raise an advisory.
                 gates.append(rule)
 
-    # Gates: pull the target out of the auto-plan and surface it for pharmacist review.
+    # Gates: target_entity may be a single entity, a comma list, or a mechanism
+    # class. Pull any recommended entity out of the auto-plan for pharmacist
+    # review; lifestyle/class gates with nothing to pull surface an advisory.
     gated = []
+    advisories = []
+    seen_advice = set()
     for rule in gates:
-        eid = rule["target_entity"]
-        if eid in recommended:
-            item = recommended.pop(eid)
-        else:
-            entity = conn.execute("SELECT * FROM entity WHERE entity_id = ?", (eid,)).fetchone()
-            if entity is None:
-                continue
-            item = {"entity_id": eid, "canonical_name": entity["canonical_name"], "reasons": []}
-        gated.append({**item,
-                      "gating_flag": rule["gating_flag"],
-                      "gate_rationale": rule["rationale"],
-                      "source_ref": rule["source_ref"]})
+        targets = [t.strip() for t in (rule["target_entity"] or "").split(",") if t.strip()]
+        pulled = False
+        for eid in targets:
+            if eid in recommended:
+                item = recommended.pop(eid)
+                gated.append({**item,
+                              "gating_flag": rule["gating_flag"],
+                              "gate_rationale": rule["rationale"],
+                              "source_ref": rule["source_ref"]})
+                pulled = True
+        if not pulled and rule["gating_flag"] not in seen_advice:
+            seen_advice.add(rule["gating_flag"])
+            advisories.append({
+                "gating_flag": rule["gating_flag"],
+                "trigger": rule["trigger_field"],
+                "rationale": rule["rationale"],
+                "source_ref": rule["source_ref"],
+            })
 
     plan = list(recommended.values())
 
@@ -78,4 +100,4 @@ def build_plan(survey: dict, conn) -> dict:
                for m in survey.get("meds", [])]
     report = evaluate(active, survey.get("profile"), conn)
 
-    return {"plan": plan, "gated": gated, "report": report}
+    return {"plan": plan, "gated": gated, "advisories": advisories, "report": report}

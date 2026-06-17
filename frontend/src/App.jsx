@@ -18,7 +18,19 @@ const PROFILE_FLAGS = [
   { id: 'hypertension', label: 'High blood pressure' },
   { id: 'renal_impaired', label: 'Kidney disease' },
   { id: 'hepatic_impaired', label: 'Liver disease' },
+  { id: 'epilepsy', label: 'Epilepsy / seizure history' },
+  { id: 'long_qt', label: 'Long QT / cardiac arrhythmia' },
   { id: 'pre_surgery', label: 'Surgery in next 2 weeks' },
+]
+
+// Lifestyle toggles. surveyField/surveyValue feed /plan gate rules; profile sets
+// an engine modifier flag; entity adds a representative agent to a /check stack.
+const LIFESTYLE = [
+  { id: 'smoking', label: 'Smoke / vape', surveyField: 'smoking_status', surveyValue: 'current_smoker', profile: 'smoker', entity: 'nicotine' },
+  { id: 'cbd', label: 'Use CBD', surveyField: 'uses_cbd', surveyValue: 'yes', entity: 'cbd' },
+  { id: 'cannabis', label: 'Use cannabis (THC)', surveyField: 'uses_cannabis', surveyValue: 'yes', entity: 'thc-cannabis' },
+  { id: 'glp1', label: 'On a GLP-1 (Ozempic / Mounjaro)', surveyField: 'uses_glp1', surveyValue: 'yes', entity: 'semaglutide' },
+  { id: 'bloodwork', label: 'Bloodwork coming up', surveyField: 'upcoming_bloodwork', surveyValue: 'yes', profile: 'upcoming_bloodwork' },
 ]
 
 const SEVERITY_LABEL = {
@@ -144,6 +156,20 @@ function Report({ report, names }) {
   )
 }
 
+function Advisories({ advisories }) {
+  if (!advisories || advisories.length === 0) return null
+  return (
+    <div className="advisories">
+      <h3>Lifestyle advisories</h3>
+      {advisories.map((a) => (
+        <div key={a.gating_flag} className="advisory">
+          <strong>{a.trigger.replace(/_/g, ' ')}:</strong> {a.rationale} <Citation url={a.source_ref} />
+        </div>
+      ))}
+    </div>
+  )
+}
+
 function ResearchPanel({ entityId, names }) {
   const [state, setState] = useState({ loading: false, data: null })
   const load = async () => {
@@ -249,12 +275,25 @@ export default function App() {
   const [sun, setSun] = useState('moderate')
   const [meds, setMeds] = useState([])
   const [profile, setProfile] = useState({})
+  const [lifestyle, setLifestyle] = useState({})   // {smoking, cbd, cannabis, glp1, bloodwork}
   const [planResult, setPlanResult] = useState(null)
 
   // Checker state
   const [stack, setStack] = useState([])
   const [checkProfile, setCheckProfile] = useState({})
   const [checkResult, setCheckResult] = useState(null)
+
+  // Translate lifestyle toggles into survey gate fields + engine profile flags.
+  const lifestyleSurvey = (ls) => {
+    const out = {}
+    for (const item of LIFESTYLE) if (ls[item.id] && item.surveyField) out[item.surveyField] = item.surveyValue
+    return out
+  }
+  const lifestyleProfile = (ls) => {
+    const out = {}
+    for (const item of LIFESTYLE) if (ls[item.id] && item.profile) out[item.profile] = true
+    return out
+  }
 
   const names = useMemo(() => Object.fromEntries(entities.map((e) => [e.entity_id, e.canonical_name])), [entities])
 
@@ -266,7 +305,10 @@ export default function App() {
   const runPlan = async () => {
     setBusy(true); setError(null)
     try {
-      setPlanResult(await postPlan({ goals, diet, alcohol, sun, meds, profile }))
+      const survey = { goals, diet, alcohol, sun, meds,
+                       ...lifestyleSurvey(lifestyle),
+                       profile: { ...profile, ...lifestyleProfile(lifestyle) } }
+      setPlanResult(await postPlan(survey))
     } catch (e) { setError(String(e)) } finally { setBusy(false) }
   }
 
@@ -356,7 +398,13 @@ export default function App() {
                 </button>
               ))}
             </div>
-            <h2>4 · Anything that applies?</h2>
+            <h2>4 · Lifestyle &amp; products you use</h2>
+            <div className="chips">
+              {LIFESTYLE.map((l) => (
+                <button key={l.id} className={`chip ${lifestyle[l.id] ? 'on' : ''}`} onClick={() => setLifestyle({ ...lifestyle, [l.id]: !lifestyle[l.id] })}>{l.label}</button>
+              ))}
+            </div>
+            <h2>5 · Anything that applies?</h2>
             <div className="chips">
               {PROFILE_FLAGS.map((p) => (
                 <button key={p.id} className={`chip ${profile[p.id] ? 'on' : ''}`} onClick={() => setProfile({ ...profile, [p.id]: !profile[p.id] })}>{p.label}</button>
@@ -373,6 +421,7 @@ export default function App() {
                 {planResult.plan.map((p) => <PlanCard key={p.entity_id} item={p} names={names} />)}
                 {planResult.gated.map((g) => <PlanCard key={g.entity_id} item={g} names={names} gated />)}
               </div>
+              <Advisories advisories={planResult.advisories} />
               <Report report={planResult.report} names={names} />
             </div>
           )}
@@ -391,6 +440,25 @@ export default function App() {
                   {names[m.entity_id] || m.entity_id}{m.dose ? ` ${m.dose}${m.dose_unit || 'mg'}` : ''} ✕
                 </button>
               ))}
+            </div>
+            <h2>Lifestyle &amp; products you use</h2>
+            <p className="muted">Quick-adds the relevant agent and sets your profile.</p>
+            <div className="chips">
+              {LIFESTYLE.map((l) => {
+                const on = lifestyle[l.id]
+                return (
+                  <button key={l.id} className={`chip ${on ? 'on' : ''}`} onClick={() => {
+                    const next = { ...lifestyle, [l.id]: !on }
+                    setLifestyle(next)
+                    if (l.entity) {
+                      setStack((cur) => on
+                        ? cur.filter((s) => s.entity_id !== l.entity)
+                        : (cur.some((s) => s.entity_id === l.entity) ? cur : [...cur, { entity_id: l.entity, source: 'cart' }]))
+                    }
+                    if (l.profile) setCheckProfile((cur) => ({ ...cur, [l.profile]: !on }))
+                  }}>{l.label}</button>
+                )
+              })}
             </div>
             <h2>Health profile</h2>
             <div className="chips">

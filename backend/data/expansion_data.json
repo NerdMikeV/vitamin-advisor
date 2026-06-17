@@ -1,0 +1,3304 @@
+{
+ "_meta": {
+  "purpose": "Expansion pack extracted from expansion_research.md; merged by load_seed.py with normalization + dedup.",
+  "source": "backend/data/expansion_research.md"
+ },
+ "new_mechanism_tags": [
+  {
+   "tag": "CYP1A2-substrate",
+   "kind": "PK"
+  },
+  {
+   "tag": "CYP1A2-inhibitor",
+   "kind": "PK"
+  },
+  {
+   "tag": "CYP1A2-inducer",
+   "kind": "PK"
+  },
+  {
+   "tag": "CYP2C19-substrate",
+   "kind": "PK"
+  },
+  {
+   "tag": "CYP2C19-inhibitor",
+   "kind": "PK"
+  },
+  {
+   "tag": "CYP2C9-inhibitor",
+   "kind": "PK"
+  },
+  {
+   "tag": "CYP2D6-substrate",
+   "kind": "PK"
+  },
+  {
+   "tag": "CYP2D6-inhibitor",
+   "kind": "PK"
+  },
+  {
+   "tag": "Pgp-inhibitor",
+   "kind": "PK"
+  },
+  {
+   "tag": "delayed-gastric-emptying",
+   "kind": "PK"
+  },
+  {
+   "tag": "bradycardic",
+   "kind": "PD"
+  },
+  {
+   "tag": "clotting-risk",
+   "kind": "PD"
+  },
+  {
+   "tag": "seizure-threshold-lowering",
+   "kind": "PD"
+  },
+  {
+   "tag": "statin-like",
+   "kind": "PD"
+  },
+  {
+   "tag": "lab-assay-interference",
+   "kind": "other"
+  },
+  {
+   "tag": "hypertensive",
+   "kind": "PD"
+  },
+  {
+   "tag": "potassium-lowering",
+   "kind": "PD"
+  },
+  {
+   "tag": "nitrate",
+   "kind": "PD"
+  },
+  {
+   "tag": "depletes-vitamin-D",
+   "kind": "depletion"
+  },
+  {
+   "tag": "depletes-folate",
+   "kind": "depletion"
+  },
+  {
+   "tag": "depletes-vitamin-C",
+   "kind": "depletion"
+  }
+ ],
+ "id_aliases": {
+  "st-johns-wort": "st_johns_wort",
+  "vitamin-k": "vitamin_k",
+  "combined-oral-contraceptive": "oral_contraceptive"
+ },
+ "condition_map": {
+  "epilepsy/seizure history": "epilepsy",
+  "current smoker": "smoker",
+  "liver disease/elevated LFTs": "hepatic_impaired",
+  "long QT / cardiac arrhythmia": "long_qt",
+  "upcoming lab test (troponin/thyroid/hCG)": "upcoming_bloodwork"
+ },
+ "stub_entities": [
+  {
+   "entity_id": "nitroglycerin",
+   "canonical_name": "Nitroglycerin",
+   "entity_type": "drug",
+   "aka": [
+    "Nitrostat",
+    "Nitro-Dur",
+    "Nitrolingual",
+    "GTN"
+   ],
+   "category": "nitrate-vasodilator",
+   "dose_low": null,
+   "dose_high": null,
+   "dose_unit": null,
+   "forms": [
+    "sublingual",
+    "patch",
+    "spray"
+   ],
+   "tags": [
+    {
+     "tag": "hypotensive",
+     "role": "effector"
+    },
+    {
+     "tag": "nitrate",
+     "role": "effector"
+    }
+   ]
+  },
+  {
+   "entity_id": "ciprofloxacin",
+   "canonical_name": "Ciprofloxacin",
+   "entity_type": "drug",
+   "aka": [
+    "Cipro"
+   ],
+   "category": "antibiotic-fluoroquinolone",
+   "dose_low": 250,
+   "dose_high": 750,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "oral_suspension"
+   ],
+   "tags": [
+    {
+     "tag": "CYP1A2-inhibitor",
+     "role": "inhibitor",
+     "note": "strong"
+    }
+   ]
+  },
+  {
+   "entity_id": "fluvoxamine",
+   "canonical_name": "Fluvoxamine",
+   "entity_type": "drug",
+   "aka": [
+    "Luvox"
+   ],
+   "category": "SSRI",
+   "dose_low": 50,
+   "dose_high": 300,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "capsule_ER"
+   ],
+   "tags": [
+    {
+     "tag": "CYP1A2-inhibitor",
+     "role": "inhibitor",
+     "note": "strong"
+    },
+    {
+     "tag": "serotonergic",
+     "role": "effector"
+    }
+   ]
+  },
+  {
+   "entity_id": "clozapine",
+   "canonical_name": "Clozapine",
+   "entity_type": "drug",
+   "aka": [
+    "Clozaril",
+    "Versacloz"
+   ],
+   "category": "antipsychotic-atypical",
+   "dose_low": 12.5,
+   "dose_high": 900,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "oral_suspension"
+   ],
+   "tags": [
+    {
+     "tag": "CYP1A2-substrate",
+     "role": "substrate",
+     "note": "levels rise ~1.5x on smoking cessation"
+    },
+    {
+     "tag": "CNS-depressant",
+     "role": "effector"
+    }
+   ]
+  },
+  {
+   "entity_id": "clobazam",
+   "canonical_name": "Clobazam",
+   "entity_type": "drug",
+   "aka": [
+    "Onfi",
+    "Sympazan"
+   ],
+   "category": "benzodiazepine",
+   "dose_low": 5,
+   "dose_high": 40,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "oral_suspension",
+    "film"
+   ],
+   "tags": [
+    {
+     "tag": "CNS-depressant",
+     "role": "effector"
+    },
+    {
+     "tag": "CYP3A4-substrate",
+     "role": "substrate",
+     "note": "CBD raises active metabolite"
+    }
+   ]
+  },
+  {
+   "entity_id": "atorvastatin",
+   "canonical_name": "Atorvastatin",
+   "entity_type": "drug",
+   "aka": [
+    "Lipitor"
+   ],
+   "category": "statin",
+   "dose_low": 10,
+   "dose_high": 80,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet"
+   ],
+   "tags": [
+    {
+     "tag": "CYP3A4-substrate",
+     "role": "substrate"
+    },
+    {
+     "tag": "hepatotoxic",
+     "role": "effector",
+     "note": "mild, dose-related"
+    }
+   ]
+  },
+  {
+   "entity_id": "rosuvastatin",
+   "canonical_name": "Rosuvastatin",
+   "entity_type": "drug",
+   "aka": [
+    "Crestor",
+    "Ezallor"
+   ],
+   "category": "statin",
+   "dose_low": 5,
+   "dose_high": 40,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet"
+   ],
+   "tags": []
+  },
+  {
+   "entity_id": "simvastatin",
+   "canonical_name": "Simvastatin",
+   "entity_type": "drug",
+   "aka": [
+    "Zocor",
+    "FloLipid"
+   ],
+   "category": "statin",
+   "dose_low": 5,
+   "dose_high": 40,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet"
+   ],
+   "tags": [
+    {
+     "tag": "CYP3A4-substrate",
+     "role": "substrate"
+    }
+   ]
+  },
+  {
+   "entity_id": "alcohol",
+   "canonical_name": "Alcohol",
+   "entity_type": "food",
+   "aka": [
+    "ethanol",
+    "drinking",
+    "beer",
+    "wine",
+    "liquor"
+   ],
+   "category": "lifestyle",
+   "dose_low": null,
+   "dose_high": null,
+   "dose_unit": null,
+   "forms": [
+    "beverage"
+   ],
+   "tags": [
+    {
+     "tag": "CNS-depressant",
+     "role": "effector"
+    },
+    {
+     "tag": "hepatotoxic",
+     "role": "effector"
+    }
+   ]
+  }
+ ],
+ "aka_extensions": {
+  "warfarin": [
+   "Coumadin",
+   "Jantoven"
+  ],
+  "apixaban": [
+   "Eliquis"
+  ],
+  "aspirin": [
+   "Bayer",
+   "Ecotrin",
+   "ASA"
+  ],
+  "levothyroxine": [
+   "Synthroid",
+   "Levoxyl",
+   "Unithroid"
+  ],
+  "metformin": [
+   "Glucophage",
+   "Fortamet"
+  ],
+  "ppi": [
+   "Prilosec",
+   "omeprazole",
+   "Nexium",
+   "esomeprazole",
+   "pantoprazole",
+   "Protonix"
+  ],
+  "ace_inhibitor": [
+   "lisinopril",
+   "Prinivil",
+   "Zestril"
+  ],
+  "arb": [
+   "losartan",
+   "Cozaar"
+  ],
+  "diuretic": [
+   "furosemide",
+   "Lasix"
+  ],
+  "immunosuppressant": [
+   "cyclosporine",
+   "Neoral",
+   "Sandimmune",
+   "tacrolimus",
+   "Prograf"
+  ]
+ },
+ "entities": [
+  {
+   "entity_id": "sertraline",
+   "canonical_name": "Sertraline",
+   "entity_type": "drug",
+   "aka": [
+    "Zoloft"
+   ],
+   "category": "SSRI",
+   "dose_low": 25,
+   "dose_high": 200,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "oral_solution"
+   ],
+   "tags": [
+    {
+     "tag": "serotonergic",
+     "role": "effector",
+     "note": "SSRI"
+    },
+    {
+     "tag": "QT-prolonging",
+     "role": "effector",
+     "note": "mild, dose-related"
+    }
+   ]
+  },
+  {
+   "entity_id": "escitalopram",
+   "canonical_name": "Escitalopram",
+   "entity_type": "drug",
+   "aka": [
+    "Lexapro"
+   ],
+   "category": "SSRI",
+   "dose_low": 5,
+   "dose_high": 20,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "oral_solution"
+   ],
+   "tags": [
+    {
+     "tag": "serotonergic",
+     "role": "effector"
+    },
+    {
+     "tag": "QT-prolonging",
+     "role": "effector",
+     "note": "dose-dependent; CredibleMeds known risk"
+    },
+    {
+     "tag": "CYP2C19-substrate",
+     "role": "substrate"
+    }
+   ]
+  },
+  {
+   "entity_id": "fluoxetine",
+   "canonical_name": "Fluoxetine",
+   "entity_type": "drug",
+   "aka": [
+    "Prozac"
+   ],
+   "category": "SSRI",
+   "dose_low": 10,
+   "dose_high": 80,
+   "dose_unit": "mg",
+   "forms": [
+    "capsule",
+    "tablet",
+    "oral_solution"
+   ],
+   "tags": [
+    {
+     "tag": "serotonergic",
+     "role": "effector"
+    },
+    {
+     "tag": "CYP2D6-inhibitor",
+     "role": "inhibitor",
+     "note": "strong"
+    },
+    {
+     "tag": "CYP2C19-inhibitor",
+     "role": "inhibitor"
+    }
+   ]
+  },
+  {
+   "entity_id": "paroxetine",
+   "canonical_name": "Paroxetine",
+   "entity_type": "drug",
+   "aka": [
+    "Paxil"
+   ],
+   "category": "SSRI",
+   "dose_low": 10,
+   "dose_high": 60,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "oral_solution"
+   ],
+   "tags": [
+    {
+     "tag": "serotonergic",
+     "role": "effector"
+    },
+    {
+     "tag": "CYP2D6-inhibitor",
+     "role": "inhibitor",
+     "note": "strong"
+    }
+   ]
+  },
+  {
+   "entity_id": "citalopram",
+   "canonical_name": "Citalopram",
+   "entity_type": "drug",
+   "aka": [
+    "Celexa"
+   ],
+   "category": "SSRI",
+   "dose_low": 10,
+   "dose_high": 40,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet"
+   ],
+   "tags": [
+    {
+     "tag": "serotonergic",
+     "role": "effector"
+    },
+    {
+     "tag": "QT-prolonging",
+     "role": "effector",
+     "note": "FDA max-dose limit 40mg; CredibleMeds known risk"
+    },
+    {
+     "tag": "CYP2C19-substrate",
+     "role": "substrate"
+    }
+   ]
+  },
+  {
+   "entity_id": "venlafaxine",
+   "canonical_name": "Venlafaxine",
+   "entity_type": "drug",
+   "aka": [
+    "Effexor",
+    "Effexor XR"
+   ],
+   "category": "SNRI",
+   "dose_low": 37.5,
+   "dose_high": 225,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "capsule_ER"
+   ],
+   "tags": [
+    {
+     "tag": "serotonergic",
+     "role": "effector"
+    },
+    {
+     "tag": "QT-prolonging",
+     "role": "effector"
+    },
+    {
+     "tag": "stimulant-sympathomimetic",
+     "role": "effector",
+     "note": "noradrenergic at higher doses"
+    }
+   ]
+  },
+  {
+   "entity_id": "duloxetine",
+   "canonical_name": "Duloxetine",
+   "entity_type": "drug",
+   "aka": [
+    "Cymbalta"
+   ],
+   "category": "SNRI",
+   "dose_low": 20,
+   "dose_high": 120,
+   "dose_unit": "mg",
+   "forms": [
+    "capsule_DR"
+   ],
+   "tags": [
+    {
+     "tag": "serotonergic",
+     "role": "effector"
+    },
+    {
+     "tag": "CYP1A2-substrate",
+     "role": "substrate",
+     "note": "levels fall with smoking"
+    },
+    {
+     "tag": "hepatotoxic",
+     "role": "effector"
+    }
+   ]
+  },
+  {
+   "entity_id": "desvenlafaxine",
+   "canonical_name": "Desvenlafaxine",
+   "entity_type": "drug",
+   "aka": [
+    "Pristiq"
+   ],
+   "category": "SNRI",
+   "dose_low": 50,
+   "dose_high": 100,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet_ER"
+   ],
+   "tags": [
+    {
+     "tag": "serotonergic",
+     "role": "effector"
+    }
+   ]
+  },
+  {
+   "entity_id": "bupropion",
+   "canonical_name": "Bupropion",
+   "entity_type": "drug",
+   "aka": [
+    "Wellbutrin",
+    "Wellbutrin XL",
+    "Wellbutrin SR",
+    "Zyban"
+   ],
+   "category": "antidepressant-NDRI",
+   "dose_low": 150,
+   "dose_high": 450,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet_ER"
+   ],
+   "tags": [
+    {
+     "tag": "CYP2D6-inhibitor",
+     "role": "inhibitor"
+    },
+    {
+     "tag": "seizure-threshold-lowering",
+     "role": "effector"
+    },
+    {
+     "tag": "stimulant-sympathomimetic",
+     "role": "effector",
+     "note": "activating; also in Contrave"
+    }
+   ]
+  },
+  {
+   "entity_id": "trazodone",
+   "canonical_name": "Trazodone",
+   "entity_type": "drug",
+   "aka": [
+    "Desyrel"
+   ],
+   "category": "antidepressant-SARI",
+   "dose_low": 25,
+   "dose_high": 400,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet"
+   ],
+   "tags": [
+    {
+     "tag": "serotonergic",
+     "role": "effector"
+    },
+    {
+     "tag": "CNS-depressant",
+     "role": "effector",
+     "note": "sedating"
+    },
+    {
+     "tag": "QT-prolonging",
+     "role": "effector",
+     "note": "mild, mostly overdose"
+    }
+   ]
+  },
+  {
+   "entity_id": "mirtazapine",
+   "canonical_name": "Mirtazapine",
+   "entity_type": "drug",
+   "aka": [
+    "Remeron"
+   ],
+   "category": "antidepressant",
+   "dose_low": 7.5,
+   "dose_high": 45,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "ODT"
+   ],
+   "tags": [
+    {
+     "tag": "serotonergic",
+     "role": "effector"
+    },
+    {
+     "tag": "CNS-depressant",
+     "role": "effector",
+     "note": "sedating"
+    }
+   ]
+  },
+  {
+   "entity_id": "alprazolam",
+   "canonical_name": "Alprazolam",
+   "entity_type": "drug",
+   "aka": [
+    "Xanax",
+    "Xanax XR"
+   ],
+   "category": "benzodiazepine",
+   "dose_low": 0.25,
+   "dose_high": 4,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "ER",
+    "ODT"
+   ],
+   "tags": [
+    {
+     "tag": "CNS-depressant",
+     "role": "effector"
+    },
+    {
+     "tag": "CYP3A4-substrate",
+     "role": "substrate"
+    }
+   ]
+  },
+  {
+   "entity_id": "lorazepam",
+   "canonical_name": "Lorazepam",
+   "entity_type": "drug",
+   "aka": [
+    "Ativan"
+   ],
+   "category": "benzodiazepine",
+   "dose_low": 0.5,
+   "dose_high": 6,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "oral_solution"
+   ],
+   "tags": [
+    {
+     "tag": "CNS-depressant",
+     "role": "effector"
+    }
+   ]
+  },
+  {
+   "entity_id": "clonazepam",
+   "canonical_name": "Clonazepam",
+   "entity_type": "drug",
+   "aka": [
+    "Klonopin"
+   ],
+   "category": "benzodiazepine",
+   "dose_low": 0.25,
+   "dose_high": 4,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "ODT"
+   ],
+   "tags": [
+    {
+     "tag": "CNS-depressant",
+     "role": "effector"
+    },
+    {
+     "tag": "CYP3A4-substrate",
+     "role": "substrate"
+    }
+   ]
+  },
+  {
+   "entity_id": "diazepam",
+   "canonical_name": "Diazepam",
+   "entity_type": "drug",
+   "aka": [
+    "Valium"
+   ],
+   "category": "benzodiazepine",
+   "dose_low": 2,
+   "dose_high": 40,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "oral_solution"
+   ],
+   "tags": [
+    {
+     "tag": "CNS-depressant",
+     "role": "effector"
+    },
+    {
+     "tag": "CYP3A4-substrate",
+     "role": "substrate"
+    },
+    {
+     "tag": "CYP2C19-substrate",
+     "role": "substrate"
+    }
+   ]
+  },
+  {
+   "entity_id": "quetiapine",
+   "canonical_name": "Quetiapine",
+   "entity_type": "drug",
+   "aka": [
+    "Seroquel",
+    "Seroquel XR"
+   ],
+   "category": "antipsychotic-atypical",
+   "dose_low": 25,
+   "dose_high": 800,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "ER"
+   ],
+   "tags": [
+    {
+     "tag": "QT-prolonging",
+     "role": "effector",
+     "note": "FDA warning"
+    },
+    {
+     "tag": "CNS-depressant",
+     "role": "effector",
+     "note": "sedating"
+    },
+    {
+     "tag": "CYP3A4-substrate",
+     "role": "substrate"
+    }
+   ]
+  },
+  {
+   "entity_id": "aripiprazole",
+   "canonical_name": "Aripiprazole",
+   "entity_type": "drug",
+   "aka": [
+    "Abilify"
+   ],
+   "category": "antipsychotic-atypical",
+   "dose_low": 2,
+   "dose_high": 30,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "ODT",
+    "oral_solution"
+   ],
+   "tags": [
+    {
+     "tag": "CYP3A4-substrate",
+     "role": "substrate"
+    },
+    {
+     "tag": "CYP2D6-substrate",
+     "role": "substrate"
+    }
+   ]
+  },
+  {
+   "entity_id": "risperidone",
+   "canonical_name": "Risperidone",
+   "entity_type": "drug",
+   "aka": [
+    "Risperdal"
+   ],
+   "category": "antipsychotic-atypical",
+   "dose_low": 0.5,
+   "dose_high": 8,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "ODT",
+    "oral_solution"
+   ],
+   "tags": [
+    {
+     "tag": "QT-prolonging",
+     "role": "effector",
+     "note": "minor at low dose"
+    },
+    {
+     "tag": "CYP2D6-substrate",
+     "role": "substrate"
+    }
+   ]
+  },
+  {
+   "entity_id": "olanzapine",
+   "canonical_name": "Olanzapine",
+   "entity_type": "drug",
+   "aka": [
+    "Zyprexa"
+   ],
+   "category": "antipsychotic-atypical",
+   "dose_low": 2.5,
+   "dose_high": 20,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "ODT"
+   ],
+   "tags": [
+    {
+     "tag": "CNS-depressant",
+     "role": "effector",
+     "note": "sedating"
+    },
+    {
+     "tag": "CYP1A2-substrate",
+     "role": "substrate",
+     "note": "levels fall with smoking; cut dose ~30-40% on cessation"
+    }
+   ]
+  },
+  {
+   "entity_id": "lurasidone",
+   "canonical_name": "Lurasidone",
+   "entity_type": "drug",
+   "aka": [
+    "Latuda"
+   ],
+   "category": "antipsychotic-atypical",
+   "dose_low": 20,
+   "dose_high": 160,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet"
+   ],
+   "tags": [
+    {
+     "tag": "CYP3A4-substrate",
+     "role": "substrate",
+     "note": "contraindicated with strong CYP3A4 inhibitors/inducers"
+    }
+   ]
+  },
+  {
+   "entity_id": "metoprolol",
+   "canonical_name": "Metoprolol",
+   "entity_type": "drug",
+   "aka": [
+    "Lopressor",
+    "Toprol XL"
+   ],
+   "category": "beta-blocker",
+   "dose_low": 25,
+   "dose_high": 400,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "ER"
+   ],
+   "tags": [
+    {
+     "tag": "hypotensive",
+     "role": "effector"
+    },
+    {
+     "tag": "bradycardic",
+     "role": "effector"
+    },
+    {
+     "tag": "CYP2D6-substrate",
+     "role": "substrate"
+    }
+   ]
+  },
+  {
+   "entity_id": "atenolol",
+   "canonical_name": "Atenolol",
+   "entity_type": "drug",
+   "aka": [
+    "Tenormin"
+   ],
+   "category": "beta-blocker",
+   "dose_low": 25,
+   "dose_high": 100,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet"
+   ],
+   "tags": [
+    {
+     "tag": "hypotensive",
+     "role": "effector"
+    },
+    {
+     "tag": "bradycardic",
+     "role": "effector"
+    }
+   ]
+  },
+  {
+   "entity_id": "carvedilol",
+   "canonical_name": "Carvedilol",
+   "entity_type": "drug",
+   "aka": [
+    "Coreg"
+   ],
+   "category": "beta-blocker",
+   "dose_low": 3.125,
+   "dose_high": 50,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "ER"
+   ],
+   "tags": [
+    {
+     "tag": "hypotensive",
+     "role": "effector"
+    },
+    {
+     "tag": "bradycardic",
+     "role": "effector"
+    },
+    {
+     "tag": "CYP2D6-substrate",
+     "role": "substrate"
+    }
+   ]
+  },
+  {
+   "entity_id": "propranolol",
+   "canonical_name": "Propranolol",
+   "entity_type": "drug",
+   "aka": [
+    "Inderal",
+    "Inderal LA"
+   ],
+   "category": "beta-blocker",
+   "dose_low": 10,
+   "dose_high": 320,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "ER"
+   ],
+   "tags": [
+    {
+     "tag": "hypotensive",
+     "role": "effector"
+    },
+    {
+     "tag": "bradycardic",
+     "role": "effector"
+    },
+    {
+     "tag": "CYP2D6-substrate",
+     "role": "substrate"
+    },
+    {
+     "tag": "CYP1A2-substrate",
+     "role": "substrate"
+    }
+   ]
+  },
+  {
+   "entity_id": "bisoprolol",
+   "canonical_name": "Bisoprolol",
+   "entity_type": "drug",
+   "aka": [
+    "Zebeta"
+   ],
+   "category": "beta-blocker",
+   "dose_low": 2.5,
+   "dose_high": 10,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet"
+   ],
+   "tags": [
+    {
+     "tag": "hypotensive",
+     "role": "effector"
+    },
+    {
+     "tag": "bradycardic",
+     "role": "effector"
+    }
+   ]
+  },
+  {
+   "entity_id": "semaglutide",
+   "canonical_name": "Semaglutide",
+   "entity_type": "drug",
+   "aka": [
+    "Ozempic",
+    "Wegovy",
+    "Rybelsus"
+   ],
+   "category": "GLP-1-agonist",
+   "dose_low": 0.25,
+   "dose_high": 2.4,
+   "dose_unit": "mg",
+   "forms": [
+    "injection",
+    "tablet"
+   ],
+   "tags": [
+    {
+     "tag": "hypoglycemic",
+     "role": "effector",
+     "note": "additive with other glucose-lowering agents"
+    },
+    {
+     "tag": "delayed-gastric-emptying",
+     "role": "effector",
+     "note": "Rybelsus raises levothyroxine 33%"
+    }
+   ]
+  },
+  {
+   "entity_id": "tirzepatide",
+   "canonical_name": "Tirzepatide",
+   "entity_type": "drug",
+   "aka": [
+    "Mounjaro",
+    "Zepbound"
+   ],
+   "category": "GLP-1-GIP-agonist",
+   "dose_low": 2.5,
+   "dose_high": 15,
+   "dose_unit": "mg",
+   "forms": [
+    "injection"
+   ],
+   "tags": [
+    {
+     "tag": "hypoglycemic",
+     "role": "effector"
+    },
+    {
+     "tag": "delayed-gastric-emptying",
+     "role": "effector",
+     "note": "FDA label: backup/non-oral contraception 4 wks after init & each dose escalation"
+    }
+   ]
+  },
+  {
+   "entity_id": "dulaglutide",
+   "canonical_name": "Dulaglutide",
+   "entity_type": "drug",
+   "aka": [
+    "Trulicity"
+   ],
+   "category": "GLP-1-agonist",
+   "dose_low": 0.75,
+   "dose_high": 4.5,
+   "dose_unit": "mg",
+   "forms": [
+    "injection"
+   ],
+   "tags": [
+    {
+     "tag": "hypoglycemic",
+     "role": "effector"
+    },
+    {
+     "tag": "delayed-gastric-emptying",
+     "role": "effector"
+    }
+   ]
+  },
+  {
+   "entity_id": "liraglutide",
+   "canonical_name": "Liraglutide",
+   "entity_type": "drug",
+   "aka": [
+    "Saxenda",
+    "Victoza"
+   ],
+   "category": "GLP-1-agonist",
+   "dose_low": 0.6,
+   "dose_high": 3,
+   "dose_unit": "mg",
+   "forms": [
+    "injection"
+   ],
+   "tags": [
+    {
+     "tag": "hypoglycemic",
+     "role": "effector"
+    },
+    {
+     "tag": "delayed-gastric-emptying",
+     "role": "effector"
+    }
+   ]
+  },
+  {
+   "entity_id": "ezetimibe",
+   "canonical_name": "Ezetimibe",
+   "entity_type": "drug",
+   "aka": [
+    "Zetia"
+   ],
+   "category": "cholesterol-absorption-inhibitor",
+   "dose_low": 10,
+   "dose_high": 10,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet"
+   ],
+   "tags": []
+  },
+  {
+   "entity_id": "fenofibrate",
+   "canonical_name": "Fenofibrate",
+   "entity_type": "drug",
+   "aka": [
+    "Tricor",
+    "Fenoglide"
+   ],
+   "category": "fibrate",
+   "dose_low": 48,
+   "dose_high": 160,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "capsule"
+   ],
+   "tags": [
+    {
+     "tag": "hepatotoxic",
+     "role": "effector"
+    }
+   ]
+  },
+  {
+   "entity_id": "gemfibrozil",
+   "canonical_name": "Gemfibrozil",
+   "entity_type": "drug",
+   "aka": [
+    "Lopid"
+   ],
+   "category": "fibrate",
+   "dose_low": 600,
+   "dose_high": 1200,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet"
+   ],
+   "tags": [
+    {
+     "tag": "hepatotoxic",
+     "role": "effector"
+    },
+    {
+     "tag": "CYP2C9-inhibitor",
+     "role": "inhibitor",
+     "note": "raises statin myopathy risk"
+    }
+   ]
+  },
+  {
+   "entity_id": "pcsk9-inhibitor",
+   "canonical_name": "PCSK9 Inhibitor",
+   "entity_type": "drug_class",
+   "aka": [
+    "Repatha",
+    "evolocumab",
+    "Praluent",
+    "alirocumab"
+   ],
+   "category": "cholesterol-biologic",
+   "dose_low": null,
+   "dose_high": null,
+   "dose_unit": null,
+   "forms": [
+    "injection"
+   ],
+   "tags": []
+  },
+  {
+   "entity_id": "levetiracetam",
+   "canonical_name": "Levetiracetam",
+   "entity_type": "drug",
+   "aka": [
+    "Keppra"
+   ],
+   "category": "antiepileptic",
+   "dose_low": 500,
+   "dose_high": 3000,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "oral_solution"
+   ],
+   "tags": [
+    {
+     "tag": "CNS-depressant",
+     "role": "effector",
+     "note": "sedation"
+    }
+   ]
+  },
+  {
+   "entity_id": "lamotrigine",
+   "canonical_name": "Lamotrigine",
+   "entity_type": "drug",
+   "aka": [
+    "Lamictal"
+   ],
+   "category": "antiepileptic",
+   "dose_low": 25,
+   "dose_high": 400,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "ODT"
+   ],
+   "tags": []
+  },
+  {
+   "entity_id": "valproate",
+   "canonical_name": "Valproate / Divalproex",
+   "entity_type": "drug",
+   "aka": [
+    "Depakote",
+    "Depakene",
+    "valproic acid"
+   ],
+   "category": "antiepileptic",
+   "dose_low": 250,
+   "dose_high": 3000,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "capsule",
+    "oral_solution"
+   ],
+   "tags": [
+    {
+     "tag": "hepatotoxic",
+     "role": "effector"
+    },
+    {
+     "tag": "depletes-folate",
+     "role": "depletes"
+    }
+   ]
+  },
+  {
+   "entity_id": "carbamazepine",
+   "canonical_name": "Carbamazepine",
+   "entity_type": "drug",
+   "aka": [
+    "Tegretol",
+    "Carbatrol"
+   ],
+   "category": "antiepileptic",
+   "dose_low": 200,
+   "dose_high": 1200,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "ER",
+    "oral_solution"
+   ],
+   "tags": [
+    {
+     "tag": "CYP3A4-inducer",
+     "role": "inducer",
+     "note": "strong"
+    },
+    {
+     "tag": "depletes-folate",
+     "role": "depletes"
+    },
+    {
+     "tag": "depletes-vitamin-D",
+     "role": "depletes"
+    }
+   ]
+  },
+  {
+   "entity_id": "phenytoin",
+   "canonical_name": "Phenytoin",
+   "entity_type": "drug",
+   "aka": [
+    "Dilantin"
+   ],
+   "category": "antiepileptic",
+   "dose_low": 100,
+   "dose_high": 600,
+   "dose_unit": "mg",
+   "forms": [
+    "capsule",
+    "tablet",
+    "oral_suspension"
+   ],
+   "tags": [
+    {
+     "tag": "CYP3A4-inducer",
+     "role": "inducer"
+    },
+    {
+     "tag": "depletes-folate",
+     "role": "depletes"
+    },
+    {
+     "tag": "depletes-vitamin-D",
+     "role": "depletes"
+    }
+   ]
+  },
+  {
+   "entity_id": "gabapentin",
+   "canonical_name": "Gabapentin",
+   "entity_type": "drug",
+   "aka": [
+    "Neurontin"
+   ],
+   "category": "antiepileptic",
+   "dose_low": 100,
+   "dose_high": 3600,
+   "dose_unit": "mg",
+   "forms": [
+    "capsule",
+    "tablet",
+    "oral_solution"
+   ],
+   "tags": [
+    {
+     "tag": "CNS-depressant",
+     "role": "effector"
+    }
+   ]
+  },
+  {
+   "entity_id": "pregabalin",
+   "canonical_name": "Pregabalin",
+   "entity_type": "drug",
+   "aka": [
+    "Lyrica"
+   ],
+   "category": "antiepileptic",
+   "dose_low": 75,
+   "dose_high": 600,
+   "dose_unit": "mg",
+   "forms": [
+    "capsule"
+   ],
+   "tags": [
+    {
+     "tag": "CNS-depressant",
+     "role": "effector"
+    }
+   ]
+  },
+  {
+   "entity_id": "topiramate",
+   "canonical_name": "Topiramate",
+   "entity_type": "drug",
+   "aka": [
+    "Topamax"
+   ],
+   "category": "antiepileptic",
+   "dose_low": 25,
+   "dose_high": 400,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "capsule"
+   ],
+   "tags": [
+    {
+     "tag": "CNS-depressant",
+     "role": "effector",
+     "note": "cognitive/sedation"
+    }
+   ]
+  },
+  {
+   "entity_id": "sildenafil",
+   "canonical_name": "Sildenafil",
+   "entity_type": "drug",
+   "aka": [
+    "Viagra",
+    "Revatio"
+   ],
+   "category": "PDE5-inhibitor",
+   "dose_low": 25,
+   "dose_high": 100,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet"
+   ],
+   "tags": [
+    {
+     "tag": "hypotensive",
+     "role": "effector"
+    },
+    {
+     "tag": "CYP3A4-substrate",
+     "role": "substrate"
+    }
+   ]
+  },
+  {
+   "entity_id": "tadalafil",
+   "canonical_name": "Tadalafil",
+   "entity_type": "drug",
+   "aka": [
+    "Cialis",
+    "Adcirca"
+   ],
+   "category": "PDE5-inhibitor",
+   "dose_low": 2.5,
+   "dose_high": 20,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet"
+   ],
+   "tags": [
+    {
+     "tag": "hypotensive",
+     "role": "effector"
+    },
+    {
+     "tag": "CYP3A4-substrate",
+     "role": "substrate"
+    }
+   ]
+  },
+  {
+   "entity_id": "vardenafil",
+   "canonical_name": "Vardenafil",
+   "entity_type": "drug",
+   "aka": [
+    "Levitra",
+    "Staxyn"
+   ],
+   "category": "PDE5-inhibitor",
+   "dose_low": 5,
+   "dose_high": 20,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "ODT"
+   ],
+   "tags": [
+    {
+     "tag": "hypotensive",
+     "role": "effector"
+    },
+    {
+     "tag": "CYP3A4-substrate",
+     "role": "substrate"
+    },
+    {
+     "tag": "QT-prolonging",
+     "role": "effector"
+    }
+   ]
+  },
+  {
+   "entity_id": "estradiol",
+   "canonical_name": "Estradiol",
+   "entity_type": "drug",
+   "aka": [
+    "Estrace",
+    "Climara",
+    "Vivelle-Dot"
+   ],
+   "category": "hormone-estrogen",
+   "dose_low": 0.5,
+   "dose_high": 2,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "patch",
+    "gel"
+   ],
+   "tags": [
+    {
+     "tag": "clotting-risk",
+     "role": "effector",
+     "note": "oral > transdermal"
+    },
+    {
+     "tag": "CYP3A4-substrate",
+     "role": "substrate"
+    }
+   ]
+  },
+  {
+   "entity_id": "conjugated-estrogens",
+   "canonical_name": "Conjugated Estrogens",
+   "entity_type": "drug",
+   "aka": [
+    "Premarin"
+   ],
+   "category": "hormone-estrogen",
+   "dose_low": 0.3,
+   "dose_high": 1.25,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "cream"
+   ],
+   "tags": [
+    {
+     "tag": "clotting-risk",
+     "role": "effector",
+     "note": "highest VTE risk among oral estrogens"
+    },
+    {
+     "tag": "CYP3A4-substrate",
+     "role": "substrate"
+    }
+   ]
+  },
+  {
+   "entity_id": "progesterone",
+   "canonical_name": "Progesterone",
+   "entity_type": "drug",
+   "aka": [
+    "Prometrium"
+   ],
+   "category": "hormone-progestin",
+   "dose_low": 100,
+   "dose_high": 400,
+   "dose_unit": "mg",
+   "forms": [
+    "capsule"
+   ],
+   "tags": [
+    {
+     "tag": "CYP3A4-substrate",
+     "role": "substrate"
+    }
+   ]
+  },
+  {
+   "entity_id": "testosterone",
+   "canonical_name": "Testosterone",
+   "entity_type": "drug",
+   "aka": [
+    "AndroGel",
+    "Testim",
+    "Depo-Testosterone",
+    "Jatenzo",
+    "TRT"
+   ],
+   "category": "hormone-androgen",
+   "dose_low": 50,
+   "dose_high": 400,
+   "dose_unit": "mg",
+   "forms": [
+    "gel",
+    "injection",
+    "capsule",
+    "patch"
+   ],
+   "tags": [
+    {
+     "tag": "clotting-risk",
+     "role": "effector",
+     "note": "FDA VTE warning 2014"
+    }
+   ]
+  },
+  {
+   "entity_id": "combined-oral-contraceptive",
+   "canonical_name": "Combined Oral Contraceptive",
+   "entity_type": "drug_class",
+   "aka": [
+    "birth control pill",
+    "the pill",
+    "ethinyl estradiol/progestin",
+    "Yaz",
+    "Lo Loestrin",
+    "Sprintec",
+    "Junel"
+   ],
+   "category": "contraceptive",
+   "dose_low": null,
+   "dose_high": null,
+   "dose_unit": null,
+   "forms": [
+    "tablet"
+   ],
+   "tags": [
+    {
+     "tag": "clotting-risk",
+     "role": "effector"
+    },
+    {
+     "tag": "CYP3A4-substrate",
+     "role": "substrate"
+    }
+   ]
+  },
+  {
+   "entity_id": "phentermine",
+   "canonical_name": "Phentermine",
+   "entity_type": "drug",
+   "aka": [
+    "Adipex-P",
+    "Lomaira"
+   ],
+   "category": "appetite-suppressant",
+   "dose_low": 15,
+   "dose_high": 37.5,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "capsule"
+   ],
+   "tags": [
+    {
+     "tag": "stimulant-sympathomimetic",
+     "role": "effector",
+     "note": "raises BP/HR"
+    }
+   ]
+  },
+  {
+   "entity_id": "contrave",
+   "canonical_name": "Naltrexone/Bupropion",
+   "entity_type": "drug",
+   "aka": [
+    "Contrave"
+   ],
+   "category": "appetite-suppressant",
+   "dose_low": null,
+   "dose_high": null,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet_ER"
+   ],
+   "tags": [
+    {
+     "tag": "seizure-threshold-lowering",
+     "role": "effector"
+    },
+    {
+     "tag": "CYP2D6-inhibitor",
+     "role": "inhibitor"
+    },
+    {
+     "tag": "stimulant-sympathomimetic",
+     "role": "effector"
+    }
+   ]
+  },
+  {
+   "entity_id": "qsymia",
+   "canonical_name": "Phentermine/Topiramate",
+   "entity_type": "drug",
+   "aka": [
+    "Qsymia"
+   ],
+   "category": "appetite-suppressant",
+   "dose_low": null,
+   "dose_high": null,
+   "dose_unit": "mg",
+   "forms": [
+    "capsule_ER"
+   ],
+   "tags": [
+    {
+     "tag": "stimulant-sympathomimetic",
+     "role": "effector"
+    },
+    {
+     "tag": "CNS-depressant",
+     "role": "effector",
+     "note": "topiramate component"
+    }
+   ]
+  },
+  {
+   "entity_id": "amphetamine",
+   "canonical_name": "Amphetamine/Dextroamphetamine",
+   "entity_type": "drug",
+   "aka": [
+    "Adderall",
+    "Adderall XR",
+    "Mydayis"
+   ],
+   "category": "ADHD-stimulant",
+   "dose_low": 5,
+   "dose_high": 60,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "capsule_ER"
+   ],
+   "tags": [
+    {
+     "tag": "stimulant-sympathomimetic",
+     "role": "effector"
+    }
+   ]
+  },
+  {
+   "entity_id": "lisdexamfetamine",
+   "canonical_name": "Lisdexamfetamine",
+   "entity_type": "drug",
+   "aka": [
+    "Vyvanse"
+   ],
+   "category": "ADHD-stimulant",
+   "dose_low": 20,
+   "dose_high": 70,
+   "dose_unit": "mg",
+   "forms": [
+    "capsule",
+    "chewable"
+   ],
+   "tags": [
+    {
+     "tag": "stimulant-sympathomimetic",
+     "role": "effector"
+    }
+   ]
+  },
+  {
+   "entity_id": "methylphenidate",
+   "canonical_name": "Methylphenidate",
+   "entity_type": "drug",
+   "aka": [
+    "Ritalin",
+    "Concerta",
+    "Daytrana",
+    "Focalin"
+   ],
+   "category": "ADHD-stimulant",
+   "dose_low": 5,
+   "dose_high": 72,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "ER",
+    "patch"
+   ],
+   "tags": [
+    {
+     "tag": "stimulant-sympathomimetic",
+     "role": "effector"
+    }
+   ]
+  },
+  {
+   "entity_id": "oxycodone",
+   "canonical_name": "Oxycodone",
+   "entity_type": "drug",
+   "aka": [
+    "OxyContin",
+    "Percocet",
+    "Roxicodone"
+   ],
+   "category": "opioid",
+   "dose_low": 5,
+   "dose_high": 80,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "ER",
+    "oral_solution"
+   ],
+   "tags": [
+    {
+     "tag": "CNS-depressant",
+     "role": "effector"
+    },
+    {
+     "tag": "CYP3A4-substrate",
+     "role": "substrate"
+    },
+    {
+     "tag": "CYP2D6-substrate",
+     "role": "substrate"
+    }
+   ]
+  },
+  {
+   "entity_id": "hydrocodone",
+   "canonical_name": "Hydrocodone",
+   "entity_type": "drug",
+   "aka": [
+    "Norco",
+    "Vicodin",
+    "Lortab"
+   ],
+   "category": "opioid",
+   "dose_low": 5,
+   "dose_high": 60,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "oral_solution"
+   ],
+   "tags": [
+    {
+     "tag": "CNS-depressant",
+     "role": "effector"
+    },
+    {
+     "tag": "CYP2D6-substrate",
+     "role": "substrate"
+    },
+    {
+     "tag": "CYP3A4-substrate",
+     "role": "substrate"
+    }
+   ]
+  },
+  {
+   "entity_id": "codeine",
+   "canonical_name": "Codeine",
+   "entity_type": "drug",
+   "aka": [
+    "Tylenol with Codeine"
+   ],
+   "category": "opioid",
+   "dose_low": 15,
+   "dose_high": 60,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "oral_solution"
+   ],
+   "tags": [
+    {
+     "tag": "CNS-depressant",
+     "role": "effector"
+    },
+    {
+     "tag": "CYP2D6-substrate",
+     "role": "substrate",
+     "note": "prodrug; ultrarapid metabolizers at risk"
+    }
+   ]
+  },
+  {
+   "entity_id": "morphine",
+   "canonical_name": "Morphine",
+   "entity_type": "drug",
+   "aka": [
+    "MS Contin",
+    "Kadian"
+   ],
+   "category": "opioid",
+   "dose_low": 15,
+   "dose_high": 200,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "ER",
+    "oral_solution"
+   ],
+   "tags": [
+    {
+     "tag": "CNS-depressant",
+     "role": "effector"
+    }
+   ]
+  },
+  {
+   "entity_id": "tramadol",
+   "canonical_name": "Tramadol",
+   "entity_type": "drug",
+   "aka": [
+    "Ultram",
+    "ConZip"
+   ],
+   "category": "opioid",
+   "dose_low": 50,
+   "dose_high": 400,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "ER"
+   ],
+   "tags": [
+    {
+     "tag": "CNS-depressant",
+     "role": "effector"
+    },
+    {
+     "tag": "serotonergic",
+     "role": "effector"
+    },
+    {
+     "tag": "seizure-threshold-lowering",
+     "role": "effector"
+    },
+    {
+     "tag": "CYP2D6-substrate",
+     "role": "substrate"
+    }
+   ]
+  },
+  {
+   "entity_id": "tapentadol",
+   "canonical_name": "Tapentadol",
+   "entity_type": "drug",
+   "aka": [
+    "Nucynta"
+   ],
+   "category": "opioid",
+   "dose_low": 50,
+   "dose_high": 600,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "ER"
+   ],
+   "tags": [
+    {
+     "tag": "CNS-depressant",
+     "role": "effector"
+    },
+    {
+     "tag": "serotonergic",
+     "role": "effector"
+    }
+   ]
+  },
+  {
+   "entity_id": "cyclobenzaprine",
+   "canonical_name": "Cyclobenzaprine",
+   "entity_type": "drug",
+   "aka": [
+    "Flexeril",
+    "Amrix"
+   ],
+   "category": "muscle-relaxant",
+   "dose_low": 5,
+   "dose_high": 30,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "capsule_ER"
+   ],
+   "tags": [
+    {
+     "tag": "CNS-depressant",
+     "role": "effector"
+    },
+    {
+     "tag": "serotonergic",
+     "role": "effector"
+    },
+    {
+     "tag": "CYP1A2-substrate",
+     "role": "substrate"
+    }
+   ]
+  },
+  {
+   "entity_id": "baclofen",
+   "canonical_name": "Baclofen",
+   "entity_type": "drug",
+   "aka": [
+    "Lioresal",
+    "Ozobax"
+   ],
+   "category": "muscle-relaxant",
+   "dose_low": 5,
+   "dose_high": 80,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "oral_solution"
+   ],
+   "tags": [
+    {
+     "tag": "CNS-depressant",
+     "role": "effector"
+    }
+   ]
+  },
+  {
+   "entity_id": "tizanidine",
+   "canonical_name": "Tizanidine",
+   "entity_type": "drug",
+   "aka": [
+    "Zanaflex"
+   ],
+   "category": "muscle-relaxant",
+   "dose_low": 2,
+   "dose_high": 36,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "capsule"
+   ],
+   "tags": [
+    {
+     "tag": "CNS-depressant",
+     "role": "effector"
+    },
+    {
+     "tag": "hypotensive",
+     "role": "effector"
+    },
+    {
+     "tag": "CYP1A2-substrate",
+     "role": "substrate",
+     "note": "CONTRAINDICATED with strong CYP1A2 inhibitors (fluvoxamine, ciprofloxacin)"
+    }
+   ]
+  },
+  {
+   "entity_id": "methocarbamol",
+   "canonical_name": "Methocarbamol",
+   "entity_type": "drug",
+   "aka": [
+    "Robaxin"
+   ],
+   "category": "muscle-relaxant",
+   "dose_low": 1500,
+   "dose_high": 4000,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet"
+   ],
+   "tags": [
+    {
+     "tag": "CNS-depressant",
+     "role": "effector"
+    }
+   ]
+  },
+  {
+   "entity_id": "red-yeast-rice",
+   "canonical_name": "Red Yeast Rice",
+   "entity_type": "supplement",
+   "aka": [
+    "RYR",
+    "Monascus purpureus",
+    "monacolin K"
+   ],
+   "category": "cholesterol-support",
+   "dose_low": 600,
+   "dose_high": 2400,
+   "dose_unit": "mg",
+   "forms": [
+    "capsule",
+    "tablet"
+   ],
+   "tags": [
+    {
+     "tag": "statin-like",
+     "role": "effector",
+     "note": "monacolin K = lovastatin"
+    },
+    {
+     "tag": "hepatotoxic",
+     "role": "effector"
+    },
+    {
+     "tag": "CYP3A4-substrate",
+     "role": "substrate"
+    }
+   ]
+  },
+  {
+   "entity_id": "niacin",
+   "canonical_name": "Niacin (Vitamin B3)",
+   "entity_type": "supplement",
+   "aka": [
+    "nicotinic acid",
+    "Niaspan",
+    "vitamin B3"
+   ],
+   "category": "vitamin",
+   "dose_low": 14,
+   "dose_high": 2000,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "ER"
+   ],
+   "tags": [
+    {
+     "tag": "hepatotoxic",
+     "role": "effector",
+     "dose_threshold": 1000,
+     "dose_unit": "mg",
+     "note": "high-dose/ER"
+    }
+   ]
+  },
+  {
+   "entity_id": "berberine",
+   "canonical_name": "Berberine",
+   "entity_type": "supplement",
+   "aka": [
+    "berberine HCl"
+   ],
+   "category": "metabolic-support",
+   "dose_low": 500,
+   "dose_high": 1500,
+   "dose_unit": "mg",
+   "forms": [
+    "capsule",
+    "tablet"
+   ],
+   "tags": [
+    {
+     "tag": "hypoglycemic",
+     "role": "effector"
+    },
+    {
+     "tag": "CYP3A4-inhibitor",
+     "role": "inhibitor"
+    },
+    {
+     "tag": "CYP2D6-inhibitor",
+     "role": "inhibitor"
+    },
+    {
+     "tag": "Pgp-inhibitor",
+     "role": "inhibitor"
+    }
+   ]
+  },
+  {
+   "entity_id": "l-arginine",
+   "canonical_name": "L-Arginine",
+   "entity_type": "supplement",
+   "aka": [
+    "arginine"
+   ],
+   "category": "sports-nutrition",
+   "dose_low": 2000,
+   "dose_high": 6000,
+   "dose_unit": "mg",
+   "forms": [
+    "capsule",
+    "powder"
+   ],
+   "tags": [
+    {
+     "tag": "hypotensive",
+     "role": "effector",
+     "note": "NO-mediated vasodilation"
+    }
+   ]
+  },
+  {
+   "entity_id": "yohimbine",
+   "canonical_name": "Yohimbine",
+   "entity_type": "supplement",
+   "aka": [
+    "yohimbe",
+    "Pausinystalia johimbe"
+   ],
+   "category": "sports-nutrition",
+   "dose_low": 5,
+   "dose_high": 20,
+   "dose_unit": "mg",
+   "forms": [
+    "capsule"
+   ],
+   "tags": [
+    {
+     "tag": "stimulant-sympathomimetic",
+     "role": "effector"
+    },
+    {
+     "tag": "hypertensive",
+     "role": "effector"
+    }
+   ]
+  },
+  {
+   "entity_id": "biotin",
+   "canonical_name": "Biotin (Vitamin B7)",
+   "entity_type": "supplement",
+   "aka": [
+    "vitamin B7",
+    "vitamin H"
+   ],
+   "category": "beauty",
+   "dose_low": 30,
+   "dose_high": 10000,
+   "dose_unit": "mcg",
+   "forms": [
+    "capsule",
+    "tablet",
+    "gummy"
+   ],
+   "tags": [
+    {
+     "tag": "lab-assay-interference",
+     "role": "effector",
+     "dose_threshold": 5000,
+     "dose_unit": "mcg",
+     "note": "troponin/thyroid/hCG immunoassays"
+    }
+   ]
+  },
+  {
+   "entity_id": "valerian",
+   "canonical_name": "Valerian",
+   "entity_type": "supplement",
+   "aka": [
+    "Valeriana officinalis"
+   ],
+   "category": "sleep",
+   "dose_low": 300,
+   "dose_high": 600,
+   "dose_unit": "mg",
+   "forms": [
+    "capsule",
+    "tea"
+   ],
+   "tags": [
+    {
+     "tag": "CNS-depressant",
+     "role": "effector"
+    }
+   ]
+  },
+  {
+   "entity_id": "kava",
+   "canonical_name": "Kava",
+   "entity_type": "supplement",
+   "aka": [
+    "kava kava",
+    "Piper methysticum"
+   ],
+   "category": "sleep",
+   "dose_low": 100,
+   "dose_high": 250,
+   "dose_unit": "mg",
+   "forms": [
+    "capsule",
+    "tea"
+   ],
+   "tags": [
+    {
+     "tag": "hepatotoxic",
+     "role": "effector"
+    },
+    {
+     "tag": "CNS-depressant",
+     "role": "effector"
+    }
+   ]
+  },
+  {
+   "entity_id": "green-tea-extract",
+   "canonical_name": "Green Tea Extract",
+   "entity_type": "supplement",
+   "aka": [
+    "EGCG",
+    "Camellia sinensis extract"
+   ],
+   "category": "weight-management",
+   "dose_low": 250,
+   "dose_high": 800,
+   "dose_unit": "mg",
+   "forms": [
+    "capsule"
+   ],
+   "tags": [
+    {
+     "tag": "hepatotoxic",
+     "role": "effector",
+     "note": "EGCG; LiverTox grade A"
+    },
+    {
+     "tag": "CYP1A2-substrate",
+     "role": "substrate"
+    }
+   ]
+  },
+  {
+   "entity_id": "milk-thistle",
+   "canonical_name": "Milk Thistle",
+   "entity_type": "supplement",
+   "aka": [
+    "silymarin",
+    "Silybum marianum"
+   ],
+   "category": "liver-support",
+   "dose_low": 140,
+   "dose_high": 800,
+   "dose_unit": "mg",
+   "forms": [
+    "capsule"
+   ],
+   "tags": []
+  },
+  {
+   "entity_id": "saw-palmetto",
+   "canonical_name": "Saw Palmetto",
+   "entity_type": "supplement",
+   "aka": [
+    "Serenoa repens"
+   ],
+   "category": "mens-health",
+   "dose_low": 160,
+   "dose_high": 320,
+   "dose_unit": "mg",
+   "forms": [
+    "capsule"
+   ],
+   "tags": [
+    {
+     "tag": "antiplatelet",
+     "role": "effector",
+     "note": "mild"
+    }
+   ]
+  },
+  {
+   "entity_id": "ginseng",
+   "canonical_name": "Ginseng",
+   "entity_type": "supplement",
+   "aka": [
+    "Panax ginseng",
+    "Asian ginseng",
+    "Korean ginseng"
+   ],
+   "category": "energy",
+   "dose_low": 200,
+   "dose_high": 400,
+   "dose_unit": "mg",
+   "forms": [
+    "capsule",
+    "tea"
+   ],
+   "tags": [
+    {
+     "tag": "stimulant-sympathomimetic",
+     "role": "effector",
+     "note": "mild; may reduce warfarin effect"
+    }
+   ]
+  },
+  {
+   "entity_id": "echinacea",
+   "canonical_name": "Echinacea",
+   "entity_type": "supplement",
+   "aka": [
+    "Echinacea purpurea"
+   ],
+   "category": "immune",
+   "dose_low": 300,
+   "dose_high": 900,
+   "dose_unit": "mg",
+   "forms": [
+    "capsule",
+    "tea"
+   ],
+   "tags": []
+  },
+  {
+   "entity_id": "licorice",
+   "canonical_name": "Licorice Root",
+   "entity_type": "supplement",
+   "aka": [
+    "Glycyrrhiza glabra",
+    "glycyrrhizin",
+    "DGL"
+   ],
+   "category": "digestive",
+   "dose_low": null,
+   "dose_high": null,
+   "dose_unit": "mg",
+   "forms": [
+    "capsule",
+    "tea"
+   ],
+   "tags": [
+    {
+     "tag": "potassium-lowering",
+     "role": "effector",
+     "note": "glycyrrhizin only; DGL is deglycyrrhizinated and lacks this"
+    },
+    {
+     "tag": "hypertensive",
+     "role": "effector"
+    }
+   ]
+  },
+  {
+   "entity_id": "chromium",
+   "canonical_name": "Chromium",
+   "entity_type": "supplement",
+   "aka": [
+    "chromium picolinate"
+   ],
+   "category": "metabolic-support",
+   "dose_low": 25,
+   "dose_high": 1000,
+   "dose_unit": "mcg",
+   "forms": [
+    "capsule",
+    "tablet"
+   ],
+   "tags": [
+    {
+     "tag": "hypoglycemic",
+     "role": "effector",
+     "note": "mild"
+    }
+   ]
+  },
+  {
+   "entity_id": "iodine-kelp",
+   "canonical_name": "Iodine/Kelp",
+   "entity_type": "supplement",
+   "aka": [
+    "kelp",
+    "seaweed"
+   ],
+   "category": "thyroid",
+   "dose_low": 150,
+   "dose_high": 1100,
+   "dose_unit": "mcg",
+   "forms": [
+    "capsule",
+    "tablet"
+   ],
+   "tags": []
+  },
+  {
+   "entity_id": "dhea",
+   "canonical_name": "DHEA",
+   "entity_type": "supplement",
+   "aka": [
+    "dehydroepiandrosterone"
+   ],
+   "category": "hormone-support",
+   "dose_low": 25,
+   "dose_high": 50,
+   "dose_unit": "mg",
+   "forms": [
+    "capsule"
+   ],
+   "tags": [
+    {
+     "tag": "clotting-risk",
+     "role": "effector",
+     "note": "hormonal precursor"
+    }
+   ]
+  },
+  {
+   "entity_id": "vitamin-b6",
+   "canonical_name": "Vitamin B6",
+   "entity_type": "supplement",
+   "aka": [
+    "pyridoxine"
+   ],
+   "category": "vitamin",
+   "dose_low": 1.3,
+   "dose_high": 100,
+   "dose_unit": "mg",
+   "forms": [
+    "tablet",
+    "capsule"
+   ],
+   "tags": []
+  },
+  {
+   "entity_id": "folate",
+   "canonical_name": "Folate / Folic Acid",
+   "entity_type": "supplement",
+   "aka": [
+    "folic acid",
+    "vitamin B9",
+    "L-methylfolate"
+   ],
+   "category": "vitamin",
+   "dose_low": 400,
+   "dose_high": 1000,
+   "dose_unit": "mcg",
+   "forms": [
+    "tablet"
+   ],
+   "tags": []
+  },
+  {
+   "entity_id": "selenium",
+   "canonical_name": "Selenium",
+   "entity_type": "supplement",
+   "aka": [],
+   "category": "mineral",
+   "dose_low": 55,
+   "dose_high": 400,
+   "dose_unit": "mcg",
+   "forms": [
+    "capsule"
+   ],
+   "tags": []
+  },
+  {
+   "entity_id": "cbd",
+   "canonical_name": "Cannabidiol (CBD)",
+   "entity_type": "supplement",
+   "aka": [
+    "hemp extract",
+    "cannabidiol"
+   ],
+   "category": "wellness",
+   "dose_low": 10,
+   "dose_high": 200,
+   "dose_unit": "mg",
+   "forms": [
+    "oil",
+    "gummy",
+    "capsule"
+   ],
+   "tags": [
+    {
+     "tag": "CYP3A4-inhibitor",
+     "role": "inhibitor"
+    },
+    {
+     "tag": "CYP2C19-inhibitor",
+     "role": "inhibitor"
+    },
+    {
+     "tag": "CYP2C9-inhibitor",
+     "role": "inhibitor"
+    }
+   ]
+  },
+  {
+   "entity_id": "nicotine",
+   "canonical_name": "Nicotine / Smoking",
+   "entity_type": "food",
+   "aka": [
+    "tobacco",
+    "cigarettes",
+    "vaping"
+   ],
+   "category": "lifestyle",
+   "dose_low": null,
+   "dose_high": null,
+   "dose_unit": null,
+   "forms": [
+    "inhaled"
+   ],
+   "tags": [
+    {
+     "tag": "CYP1A2-inducer",
+     "role": "inducer"
+    },
+    {
+     "tag": "clotting-risk",
+     "role": "effector",
+     "note": "synergistic with estrogen"
+    },
+    {
+     "tag": "depletes-vitamin-C",
+     "role": "depletes"
+    }
+   ]
+  },
+  {
+   "entity_id": "thc-cannabis",
+   "canonical_name": "Cannabis (THC)",
+   "entity_type": "food",
+   "aka": [
+    "marijuana",
+    "weed",
+    "THC"
+   ],
+   "category": "lifestyle",
+   "dose_low": null,
+   "dose_high": null,
+   "dose_unit": null,
+   "forms": [
+    "inhaled",
+    "edible"
+   ],
+   "tags": [
+    {
+     "tag": "CNS-depressant",
+     "role": "effector"
+    },
+    {
+     "tag": "CYP2C9-inhibitor",
+     "role": "inhibitor",
+     "note": "THC"
+    }
+   ]
+  }
+ ],
+ "interaction_pairs": [
+  {
+   "rule_id": "ssri_sjw",
+   "agent_a": "sertraline",
+   "agent_b": "st-johns-wort",
+   "interaction_type": "pd-additive",
+   "severity": "major",
+   "mechanism": "Additive serotonergic effect \u2192 serotonin syndrome risk",
+   "is_true_contraindication": false,
+   "spacing_hours": null,
+   "evidence_grade": "B",
+   "evidence_type": "case-report",
+   "source_name": "NCCIH Herb-Drug Interactions; Maldonado-Puebla et al. Eur Psychiatry 2025",
+   "source_ref": "https://www.nccih.nih.gov/health/providers/digest/herb-drug-interactions",
+   "management_text": "Avoid St. John's Wort with any SSRI/SNRI; serotonin syndrome risk. Applies to all serotonergic-tagged agents."
+  },
+  {
+   "rule_id": "sjw_coc",
+   "agent_a": "st-johns-wort",
+   "agent_b": "combined-oral-contraceptive",
+   "interaction_type": "pk-enzyme",
+   "severity": "major",
+   "mechanism": "CYP3A4 induction lowers ethinyl estradiol/progestin \u2192 contraceptive failure, breakthrough bleeding",
+   "is_true_contraindication": false,
+   "evidence_grade": "B",
+   "evidence_type": "RCT",
+   "source_name": "Hall SD et al. Clin Pharmacol Ther 2003",
+   "source_ref": "https://pubmed.ncbi.nlm.nih.gov/14663455/",
+   "management_text": "Counsel to add a barrier method; St. John's Wort reduces contraceptive efficacy."
+  },
+  {
+   "rule_id": "sjw_estrogen_trt",
+   "agent_a": "st-johns-wort",
+   "agent_b": "testosterone",
+   "interaction_type": "pk-enzyme",
+   "severity": "moderate",
+   "mechanism": "CYP3A4 induction may lower exposure of CYP3A4-substrate hormones",
+   "is_true_contraindication": false,
+   "evidence_grade": "C",
+   "evidence_type": "mechanism",
+   "source_name": "NCCIH Herb-Drug Interactions",
+   "source_ref": "https://www.nccih.nih.gov/health/providers/digest/herb-drug-interactions",
+   "management_text": "St. John's Wort may reduce efficacy of CYP3A4-substrate hormone therapy (estradiol, testosterone)."
+  },
+  {
+   "rule_id": "cbd_warfarin",
+   "agent_a": "cbd",
+   "agent_b": "warfarin",
+   "interaction_type": "pk-enzyme",
+   "severity": "major",
+   "mechanism": "CBD inhibits CYP2C9/CYP3A4 \u2192 \u2191 warfarin levels, \u2191 INR/bleeding",
+   "is_true_contraindication": false,
+   "evidence_grade": "C",
+   "evidence_type": "case-report",
+   "source_name": "Papakyriakopoulou et al. Br J Clin Pharmacol 2026; Patsalos Epilepsia 2020",
+   "source_ref": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9871609/",
+   "management_text": "Monitor INR closely; CBD can raise warfarin levels. Consider dose reduction."
+  },
+  {
+   "rule_id": "cbd_statin",
+   "agent_a": "cbd",
+   "agent_b": "atorvastatin",
+   "interaction_type": "pk-enzyme",
+   "severity": "moderate",
+   "mechanism": "CBD CYP3A4 inhibition raises CYP3A4-substrate statin levels \u2192 myopathy risk",
+   "is_true_contraindication": false,
+   "evidence_grade": "C",
+   "evidence_type": "mechanism",
+   "source_name": "Papakyriakopoulou et al. Br J Clin Pharmacol 2026",
+   "source_ref": "https://bpspubs.onlinelibrary.wiley.com/doi/10.1002/bcp.70430",
+   "management_text": "Watch for statin side effects; CBD inhibits CYP3A4."
+  },
+  {
+   "rule_id": "cbd_valproate",
+   "agent_a": "cbd",
+   "agent_b": "valproate",
+   "interaction_type": "pk-enzyme",
+   "severity": "major",
+   "mechanism": "CBD + valproate associated with hepatocellular enzyme elevations; CBD raises clobazam",
+   "is_true_contraindication": false,
+   "evidence_grade": "A",
+   "evidence_type": "RCT",
+   "source_name": "Patsalos et al. Epilepsia 2020 (Epidiolex trials)",
+   "source_ref": "https://onlinelibrary.wiley.com/doi/10.1111/epi.16674",
+   "management_text": "Monitor LFTs when CBD combined with valproate; monitor for sedation with clobazam."
+  },
+  {
+   "rule_id": "viagra_nitrate",
+   "agent_a": "sildenafil",
+   "agent_b": "nitroglycerin",
+   "interaction_type": "pd-additive",
+   "severity": "contraindicated",
+   "mechanism": "Both elevate cGMP \u2192 profound vasodilation/life-threatening hypotension",
+   "is_true_contraindication": true,
+   "spacing_hours": 24,
+   "evidence_grade": "A",
+   "evidence_type": "RCT",
+   "source_name": "FDA Sildenafil label (DailyMed); Webb et al.",
+   "source_ref": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=d887377e-90c5-44dc-8455-b23a6755b36f",
+   "management_text": "ABSOLUTE contraindication. No PDE5 inhibitor within 24h of any nitrate."
+  },
+  {
+   "rule_id": "viagra_yohimbine",
+   "agent_a": "sildenafil",
+   "agent_b": "yohimbine",
+   "interaction_type": "pd-additive",
+   "severity": "moderate",
+   "mechanism": "Additive hemodynamic effects from stacking vasoactive agents",
+   "is_true_contraindication": false,
+   "evidence_grade": "D",
+   "evidence_type": "mechanism",
+   "source_name": "Kernohan et al. Br J Clin Pharmacol 2005 (NMI 861)",
+   "source_ref": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1884955/",
+   "management_text": "Caution stacking ED drugs with vasoactive supplements; monitor BP."
+  },
+  {
+   "rule_id": "viagra_arginine",
+   "agent_a": "sildenafil",
+   "agent_b": "l-arginine",
+   "interaction_type": "pd-additive",
+   "severity": "moderate",
+   "mechanism": "Both enhance NO/vasodilation \u2192 additive hypotension",
+   "is_true_contraindication": false,
+   "evidence_grade": "D",
+   "evidence_type": "mechanism",
+   "source_name": "Kernohan et al. Br J Clin Pharmacol 2005",
+   "source_ref": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1884955/",
+   "management_text": "Monitor for dizziness/hypotension combining high-dose L-arginine with PDE5 inhibitors."
+  },
+  {
+   "rule_id": "ryr_statin",
+   "agent_a": "red-yeast-rice",
+   "agent_b": "atorvastatin",
+   "interaction_type": "pd-additive",
+   "severity": "major",
+   "mechanism": "Duplicate HMG-CoA reductase inhibition (monacolin K = lovastatin) \u2192 myopathy/rhabdo risk",
+   "is_true_contraindication": false,
+   "evidence_grade": "A",
+   "evidence_type": "meta-analysis",
+   "source_name": "NCCIH Red Yeast Rice; Cohen Eur J Prev Cardiol 2017",
+   "source_ref": "https://www.nccih.nih.gov/health/red-yeast-rice",
+   "management_text": "Do not combine red yeast rice with a prescription statin \u2014 duplicate therapy."
+  },
+  {
+   "rule_id": "tizanidine_cyp1a2",
+   "agent_a": "tizanidine",
+   "agent_b": "ciprofloxacin",
+   "interaction_type": "pk-enzyme",
+   "severity": "contraindicated",
+   "mechanism": "CYP1A2 inhibition \u2191 tizanidine AUC 10x (cipro)/33x (fluvoxamine) \u2192 severe hypotension/bradycardia",
+   "is_true_contraindication": true,
+   "evidence_grade": "A",
+   "evidence_type": "RCT",
+   "source_name": "FDA Zanaflex label",
+   "source_ref": "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/020397s028lbl.pdf",
+   "management_text": "Contraindicated with ciprofloxacin and fluvoxamine; caution with all CYP1A2 inhibitors."
+  },
+  {
+   "rule_id": "opioid_benzo",
+   "agent_a": "oxycodone",
+   "agent_b": "alprazolam",
+   "interaction_type": "pd-additive",
+   "severity": "major",
+   "mechanism": "Additive CNS/respiratory depression \u2014 FDA boxed warning",
+   "is_true_contraindication": false,
+   "evidence_grade": "A",
+   "evidence_type": "cohort",
+   "source_name": "FDA Boxed Warning 2016 (nearly 400 products)",
+   "source_ref": "https://www.fda.gov/drugs/drug-safety-and-availability/fda-requiring-boxed-warning-updated-improve-safe-use-benzodiazepine-drug-class",
+   "management_text": "Avoid concomitant use; profound sedation, respiratory depression, coma, death possible."
+  },
+  {
+   "rule_id": "levothyroxine_calcium",
+   "agent_a": "levothyroxine",
+   "agent_b": "calcium",
+   "interaction_type": "chelation-absorption",
+   "severity": "timing-only",
+   "mechanism": "Calcium forms insoluble complex \u2192 \u2193 levothyroxine absorption",
+   "is_true_contraindication": false,
+   "spacing_hours": 4,
+   "evidence_grade": "B",
+   "evidence_type": "cohort",
+   "source_name": "DailyMed Levothyroxine label",
+   "source_ref": "https://dailymed.nlm.nih.gov/",
+   "management_text": "Separate by at least 4 hours."
+  },
+  {
+   "rule_id": "levothyroxine_iron",
+   "agent_a": "levothyroxine",
+   "agent_b": "iron",
+   "interaction_type": "chelation-absorption",
+   "severity": "timing-only",
+   "mechanism": "Iron chelates levothyroxine \u2192 ~33% \u2193 absorption",
+   "is_true_contraindication": false,
+   "spacing_hours": 4,
+   "evidence_grade": "B",
+   "evidence_type": "cohort",
+   "source_name": "DailyMed Levothyroxine label",
+   "source_ref": "https://dailymed.nlm.nih.gov/",
+   "management_text": "Separate by at least 4 hours."
+  },
+  {
+   "rule_id": "glp1_oral_absorption",
+   "agent_a": "semaglutide",
+   "agent_b": "levothyroxine",
+   "interaction_type": "timing-spacing",
+   "severity": "moderate",
+   "mechanism": "Delayed gastric emptying alters oral drug absorption; oral semaglutide \u2191 levothyroxine 33%",
+   "is_true_contraindication": false,
+   "evidence_grade": "B",
+   "evidence_type": "RCT",
+   "source_name": "FDA Rybelsus label \u00a712.3",
+   "source_ref": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=27f15fac-7d98-4114-a2ec-92494a91da98",
+   "management_text": "Monitor narrow-therapeutic-index oral drugs; increased clinical/lab monitoring."
+  },
+  {
+   "rule_id": "tirzepatide_coc",
+   "agent_a": "tirzepatide",
+   "agent_b": "combined-oral-contraceptive",
+   "interaction_type": "pk-enzyme",
+   "severity": "major",
+   "mechanism": "Delayed gastric emptying reduces oral contraceptive efficacy",
+   "is_true_contraindication": false,
+   "evidence_grade": "A",
+   "evidence_type": "RCT",
+   "source_name": "FDA Mounjaro label \u00a78.3",
+   "source_ref": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=d2d7da5d-ad07-4228-955f-cf7e355c8cc0",
+   "management_text": "Switch to non-oral contraceptive or add barrier method for 4 weeks after initiation and each dose escalation."
+  },
+  {
+   "rule_id": "berberine_diabetes",
+   "agent_a": "berberine",
+   "agent_b": "metformin",
+   "interaction_type": "pd-additive",
+   "severity": "moderate",
+   "mechanism": "Additive glucose lowering (AMPK) \u2192 hypoglycemia risk",
+   "is_true_contraindication": false,
+   "evidence_grade": "B",
+   "evidence_type": "meta-analysis",
+   "source_name": "Glucose-lowering meta-analysis, Front Pharmacol 2022",
+   "source_ref": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9709280/",
+   "management_text": "Monitor blood glucose; berberine adds to glucose-lowering agents and GLP-1s."
+  },
+  {
+   "rule_id": "warfarin_ginkgo",
+   "agent_a": "warfarin",
+   "agent_b": "ginkgo",
+   "interaction_type": "pd-additive",
+   "severity": "major",
+   "mechanism": "Antiplatelet effect + anticoagulation \u2192 bleeding",
+   "is_true_contraindication": false,
+   "evidence_grade": "B",
+   "evidence_type": "cohort",
+   "source_name": "Dietary supplements and bleeding, PMC9586694",
+   "source_ref": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9586694/",
+   "management_text": "Avoid ginkgo with warfarin; strong evidence of bleeding risk."
+  },
+  {
+   "rule_id": "warfarin_vitk",
+   "agent_a": "warfarin",
+   "agent_b": "vitamin-k",
+   "interaction_type": "pd-additive",
+   "severity": "moderate",
+   "mechanism": "Vitamin K antagonizes warfarin \u2192 \u2193 INR/efficacy",
+   "is_true_contraindication": false,
+   "evidence_grade": "A",
+   "evidence_type": "mechanism",
+   "source_name": "EBSCO Warfarin interactions",
+   "source_ref": "https://www.ebsco.com/research-starters/health-and-medicine/warfarin-drug-interactions",
+   "management_text": "Keep vitamin K intake consistent; avoid new high-dose vitamin K supplements."
+  },
+  {
+   "rule_id": "maoi_stimulant",
+   "agent_a": "maoi",
+   "agent_b": "amphetamine",
+   "interaction_type": "pd-additive",
+   "severity": "contraindicated",
+   "mechanism": "Sympathomimetic + MAO inhibition \u2192 hypertensive crisis",
+   "is_true_contraindication": true,
+   "evidence_grade": "A",
+   "evidence_type": "case-report",
+   "source_name": "FDA MAOI labels; StatPearls MAOI",
+   "source_ref": "https://www.ncbi.nlm.nih.gov/books/NBK557395/",
+   "management_text": "Absolute contraindication; applies to all stimulant-sympathomimetic-tagged agents incl. phentermine, yohimbine."
+  },
+  {
+   "rule_id": "maoi_serotonergic",
+   "agent_a": "maoi",
+   "agent_b": "sertraline",
+   "interaction_type": "pd-additive",
+   "severity": "contraindicated",
+   "mechanism": "Serotonergic + MAO inhibition \u2192 serotonin syndrome",
+   "is_true_contraindication": true,
+   "evidence_grade": "A",
+   "evidence_type": "case-report",
+   "source_name": "StatPearls MAOI",
+   "source_ref": "https://www.ncbi.nlm.nih.gov/books/NBK557395/",
+   "management_text": "Absolute contraindication; 2-week washout required."
+  },
+  {
+   "rule_id": "adderall_stimulant_supp",
+   "agent_a": "amphetamine",
+   "agent_b": "yohimbine",
+   "interaction_type": "pd-additive",
+   "severity": "moderate",
+   "mechanism": "Additive sympathomimetic \u2192 \u2191 HR/BP/arrhythmia",
+   "is_true_contraindication": false,
+   "evidence_grade": "C",
+   "evidence_type": "mechanism",
+   "source_name": "stimulant additive rule",
+   "source_ref": "https://www.ncbi.nlm.nih.gov/books/NBK557395/",
+   "management_text": "Avoid stacking stimulant pre-workout/yohimbine/synephrine with ADHD stimulants."
+  },
+  {
+   "rule_id": "estrogen_smoking",
+   "agent_a": "combined-oral-contraceptive",
+   "agent_b": "nicotine",
+   "interaction_type": "pd-additive",
+   "severity": "major",
+   "mechanism": "Synergistic clotting/VTE risk",
+   "is_true_contraindication": false,
+   "evidence_grade": "B",
+   "evidence_type": "case-control",
+   "source_name": "Pomp et al.; smoking+HT case-control PMC4363922",
+   "source_ref": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4363922/",
+   "management_text": "Smoking sharply raises clot risk with estrogen, especially age >35."
+  },
+  {
+   "rule_id": "kava_alcohol",
+   "agent_a": "kava",
+   "agent_b": "alcohol",
+   "interaction_type": "pd-additive",
+   "severity": "major",
+   "mechanism": "Additive hepatotoxicity + CNS depression",
+   "is_true_contraindication": false,
+   "evidence_grade": "B",
+   "evidence_type": "case-report",
+   "source_name": "NCCIH Kava; LiverTox",
+   "source_ref": "https://www.nccih.nih.gov/health/kava",
+   "management_text": "Do not combine kava with alcohol or other hepatotoxins/sedatives."
+  },
+  {
+   "rule_id": "smoking_clozapine",
+   "agent_a": "nicotine",
+   "agent_b": "olanzapine",
+   "interaction_type": "pk-enzyme",
+   "severity": "moderate",
+   "mechanism": "CYP1A2 induction lowers olanzapine/clozapine; cessation raises levels ~1.5x",
+   "is_true_contraindication": false,
+   "evidence_grade": "A",
+   "evidence_type": "cohort",
+   "source_name": "Australian Prescriber; Psychiatric Services",
+   "source_ref": "https://pharmaceutical-journal.com/article/ld/tobacco-smoking-and-its-potential-drug-interactions",
+   "management_text": "Levels rise on quitting; dose review needed on smoking-status change."
+  }
+ ],
+ "additive_rules": [
+  {
+   "agg_id": "cns_depressant_stack",
+   "mechanism_class": "CNS-depressant",
+   "secondary_class": null,
+   "count_threshold": 2,
+   "requires_rx_anchor": false,
+   "escalation_map": {
+    "2": "major",
+    "3": "contraindicated"
+   },
+   "evidence_grade": "A",
+   "source_name": "FDA Opioid+Benzodiazepine Boxed Warning 2016",
+   "source_ref": "https://www.fda.gov/drugs/drug-safety-and-availability/fda-requiring-boxed-warning-updated-improve-safe-use-benzodiazepine-drug-class",
+   "management_text": "Stacking CNS depressants (opioids, benzodiazepines, muscle relaxants, sedating antihistamines, alcohol, high-dose melatonin/valerian/kava, THC, gabapentinoids) \u2192 additive sedation and respiratory depression. 2 agents = major; 3+ = contraindicated. Opioid+benzo carries an explicit FDA boxed warning."
+  },
+  {
+   "agg_id": "qt_stack",
+   "mechanism_class": "QT-prolonging",
+   "secondary_class": null,
+   "count_threshold": 2,
+   "requires_rx_anchor": false,
+   "escalation_map": {
+    "2": "major",
+    "3": "contraindicated"
+   },
+   "evidence_grade": "B",
+   "source_name": "CredibleMeds; APA QTc Resource Document 2018",
+   "source_ref": "https://www.psychiatry.org/getattachment/f94e1ce6-abcf-4f78-8510-4f0375c8142a/Resource-Document-2018-QTc-Prolongation-and-Psychotropic-Med.pdf",
+   "management_text": "Multiple QT-prolonging agents (antipsychotics esp. quetiapine/ziprasidone, citalopram/escitalopram, trazodone, vardenafil, some antibiotics) \u2192 additive Torsades risk. Dose-dependent; amplified by hypokalemia. ECG/electrolyte review at 2+ agents."
+  },
+  {
+   "agg_id": "serotonergic_stack",
+   "mechanism_class": "serotonergic",
+   "secondary_class": null,
+   "count_threshold": 2,
+   "requires_rx_anchor": false,
+   "escalation_map": {
+    "2": "major",
+    "3": "contraindicated"
+   },
+   "evidence_grade": "B",
+   "source_name": "NCCIH; StatPearls Serotonin Syndrome",
+   "source_ref": "https://www.nccih.nih.gov/health/providers/digest/herb-drug-interactions",
+   "management_text": "Stacking serotonergic agents (SSRIs, SNRIs, tramadol/tapentadol, cyclobenzaprine, St. John's Wort, 5-HTP, MAOIs) \u2192 serotonin syndrome. MAOI anchor escalates to contraindicated."
+  },
+  {
+   "agg_id": "hypoglycemic_stack",
+   "mechanism_class": "hypoglycemic",
+   "secondary_class": null,
+   "count_threshold": 2,
+   "requires_rx_anchor": true,
+   "escalation_map": {
+    "2": "moderate",
+    "3": "major"
+   },
+   "evidence_grade": "B",
+   "source_name": "Berberine glucose-lowering meta-analysis 2022",
+   "source_ref": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9709280/",
+   "management_text": "Glucose-lowering agents (insulin, sulfonylureas, metformin, GLP-1s) + hypoglycemic supplements (berberine, chromium) \u2192 hypoglycemia. Requires Rx diabetes-med anchor."
+  },
+  {
+   "agg_id": "hepatotoxic_stack",
+   "mechanism_class": "hepatotoxic",
+   "secondary_class": null,
+   "count_threshold": 2,
+   "requires_rx_anchor": false,
+   "escalation_map": {
+    "2": "moderate",
+    "3": "major"
+   },
+   "evidence_grade": "B",
+   "source_name": "LiverTox (NIH)",
+   "source_ref": "https://www.ncbi.nlm.nih.gov/books/NBK547925/",
+   "management_text": "Stacking hepatotoxic agents (high-dose niacin, kava, green tea extract, high-dose vitamin A, valproate, alcohol) \u2192 additive liver injury."
+  },
+  {
+   "agg_id": "stimulant_stack",
+   "mechanism_class": "stimulant-sympathomimetic",
+   "secondary_class": null,
+   "count_threshold": 2,
+   "requires_rx_anchor": false,
+   "escalation_map": {
+    "2": "moderate",
+    "3": "major"
+   },
+   "evidence_grade": "C",
+   "source_name": "StatPearls; sympathomimetic pharmacology",
+   "source_ref": "https://www.ncbi.nlm.nih.gov/books/NBK557395/",
+   "management_text": "Stacking stimulants (ADHD stimulants, phentermine, caffeine, synephrine, yohimbine, ginseng) \u2192 \u2191 HR/BP, arrhythmia. MAOI anchor \u2192 contraindicated."
+  },
+  {
+   "agg_id": "bleeding_stack",
+   "mechanism_class": "antiplatelet",
+   "secondary_class": "anticoagulant",
+   "count_threshold": 2,
+   "requires_rx_anchor": false,
+   "escalation_map": {
+    "2": "major",
+    "3": "contraindicated"
+   },
+   "evidence_grade": "B",
+   "source_name": "Dietary supplements and bleeding PMC9586694",
+   "source_ref": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9586694/",
+   "management_text": "Anticoagulant/antiplatelet drugs + bleeding-risk supplements (ginkgo, high-dose fish oil, vitamin E >400 IU, garlic) \u2192 bleeding."
+  }
+ ],
+ "conditional_modifiers": [
+  {
+   "mod_id": "epilepsy_seizure_threshold",
+   "condition": "epilepsy/seizure history",
+   "applies_to_mechanism": "seizure-threshold-lowering",
+   "severity_delta": "+1",
+   "hard_block": false,
+   "source_name": "Wellbutrin/bupropion FDA label",
+   "source_ref": "https://www.accessdata.fda.gov/",
+   "message_text": "Bupropion/Contrave and tramadol lower seizure threshold \u2014 elevate caution in seizure-prone users."
+  },
+  {
+   "mod_id": "smoking_estrogen_clot",
+   "condition": "current smoker",
+   "applies_to_mechanism": "clotting-risk",
+   "severity_delta": "+1",
+   "hard_block": false,
+   "source_name": "Smoking + HT case-control PMC4363922",
+   "source_ref": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4363922/",
+   "message_text": "Smoking sharply increases clot risk with estrogen/COC/testosterone; counsel cessation, esp. age >35."
+  },
+  {
+   "mod_id": "liver_disease_hepatotoxic",
+   "condition": "liver disease/elevated LFTs",
+   "applies_to_mechanism": "hepatotoxic",
+   "severity_delta": "+1",
+   "hard_block": false,
+   "source_name": "LiverTox (NIH)",
+   "source_ref": "https://www.ncbi.nlm.nih.gov/books/NBK547925/",
+   "message_text": "Hepatotoxic supplements (kava, green tea extract, high-dose niacin) riskier with pre-existing liver disease."
+  },
+  {
+   "mod_id": "cardiac_qt",
+   "condition": "long QT / cardiac arrhythmia",
+   "applies_to_mechanism": "QT-prolonging",
+   "severity_delta": "+1",
+   "hard_block": false,
+   "source_name": "CredibleMeds",
+   "source_ref": "https://crediblemeds.org/",
+   "message_text": "Pre-existing QT prolongation amplifies risk of QT-prolonging agents."
+  },
+  {
+   "mod_id": "biotin_lab_pending",
+   "condition": "upcoming lab test (troponin/thyroid/hCG)",
+   "applies_to_mechanism": "lab-assay-interference",
+   "severity_delta": "0",
+   "hard_block": false,
+   "source_name": "FDA Biotin Safety Communication 2019",
+   "source_ref": "https://www.fda.gov/medical-devices/in-vitro-diagnostics/biotin-interference-troponin-lab-tests-assays-subject-biotin-interference",
+   "message_text": "Stop high-dose biotin 2-3 days before blood tests; can cause falsely low troponin and distorted thyroid/hCG results."
+  }
+ ],
+ "survey_rules": [
+  {
+   "sr_id": "smoking_cyp1a2",
+   "trigger_field": "smoking_status",
+   "trigger_value": "current_smoker",
+   "action": "gate",
+   "target_entity": "caffeine,olanzapine,clozapine,duloxetine,tizanidine",
+   "gating_flag": "cyp1a2_induced",
+   "rationale": "Smoking induces CYP1A2, lowering CYP1A2-substrate levels; cessation raises them (clozapine ~1.5x in 2-4 wks).",
+   "evidence_grade": "A",
+   "source_ref": "https://pharmaceutical-journal.com/article/ld/tobacco-smoking-and-its-potential-drug-interactions"
+  },
+  {
+   "sr_id": "smoking_estrogen",
+   "trigger_field": "smoking_status",
+   "trigger_value": "current_smoker",
+   "action": "gate",
+   "target_entity": "combined-oral-contraceptive,estradiol,testosterone",
+   "gating_flag": "clotting_risk_elevated",
+   "rationale": "Smoking synergistically raises VTE risk with hormones.",
+   "evidence_grade": "B",
+   "source_ref": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4363922/"
+  },
+  {
+   "sr_id": "cbd_use",
+   "trigger_field": "uses_cbd",
+   "trigger_value": "yes",
+   "action": "gate",
+   "target_entity": "warfarin,atorvastatin,valproate,clobazam",
+   "gating_flag": "cyp_inhibition",
+   "rationale": "CBD inhibits CYP3A4/2C19/2C9 \u2192 raises substrate levels.",
+   "evidence_grade": "C",
+   "source_ref": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9871609/"
+  },
+  {
+   "sr_id": "cannabis_sedation",
+   "trigger_field": "uses_cannabis",
+   "trigger_value": "yes",
+   "action": "gate",
+   "target_entity": "CNS-depressant",
+   "gating_flag": "additive_sedation",
+   "rationale": "THC adds to CNS depressant sedation.",
+   "evidence_grade": "C",
+   "source_ref": "https://bpspubs.onlinelibrary.wiley.com/doi/10.1002/bcp.70430"
+  },
+  {
+   "sr_id": "alcohol_cns",
+   "trigger_field": "alcohol_use",
+   "trigger_value": "regular",
+   "action": "gate",
+   "target_entity": "CNS-depressant,hepatotoxic",
+   "gating_flag": "additive_cns_hepato",
+   "rationale": "Alcohol adds CNS depression and hepatotoxicity; depletes B1/folate/B12.",
+   "evidence_grade": "A",
+   "source_ref": "https://www.fda.gov/drugs/information-drug-class/new-safety-measures-announced-opioid-analgesics-prescription-opioid-cough-products-and"
+  },
+  {
+   "sr_id": "glp1_support",
+   "trigger_field": "uses_glp1",
+   "trigger_value": "yes",
+   "action": "space",
+   "target_entity": "oral_medications,levothyroxine",
+   "gating_flag": "delayed_gastric_emptying",
+   "rationale": "GLP-1 delayed gastric emptying may affect oral drug/supplement absorption.",
+   "evidence_grade": "B",
+   "source_ref": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=27f15fac-7d98-4114-a2ec-92494a91da98"
+  },
+  {
+   "sr_id": "upcoming_labs_biotin",
+   "trigger_field": "upcoming_bloodwork",
+   "trigger_value": "yes",
+   "action": "suppress",
+   "target_entity": "biotin",
+   "gating_flag": "hold_biotin",
+   "rationale": "Biotin interferes with troponin/thyroid/hCG assays.",
+   "evidence_grade": "A",
+   "source_ref": "https://www.fda.gov/medical-devices/in-vitro-diagnostics/biotin-interference-troponin-lab-tests-assays-subject-biotin-interference"
+  }
+ ]
+}

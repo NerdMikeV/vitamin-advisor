@@ -1,8 +1,18 @@
 """Vitamin Advisor POC — FastAPI app."""
+import os
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .routers import interactions, plan, research
+
+# Allowed browser origins. Dev origins are always allowed; production origins
+# (e.g. the Vercel domain) are added via FRONTEND_ORIGIN — a comma-separated
+# list — so the deployment can be pointed at a new frontend without a code change.
+DEV_ORIGINS = ["http://localhost:5174", "http://127.0.0.1:5174"]
+ALLOWED_ORIGINS = DEV_ORIGINS + [
+    o.strip() for o in os.environ.get("FRONTEND_ORIGIN", "").split(",") if o.strip()
+]
 
 GLOBAL_FOOTER = ("This app provides general information only and is not medical advice. "
                  "It is not a substitute for professional guidance — consult your pharmacist "
@@ -14,7 +24,7 @@ app = FastAPI(title="Vitamin Advisor POC")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5174", "http://127.0.0.1:5174"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_methods=["*"],
     allow_headers=["*"],
 )

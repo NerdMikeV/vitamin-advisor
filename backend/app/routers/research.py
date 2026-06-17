@@ -13,8 +13,10 @@ from fastapi import APIRouter, Depends, HTTPException
 
 from ..db import connect
 
-# Load ANTHROPIC_API_KEY from the repo-root .env regardless of the server's
-# working directory. Does not override an already-exported variable.
+# Local dev: load ANTHROPIC_API_KEY from the repo-root .env regardless of the
+# server's working directory. In production (Railway) there is no .env file, so
+# this no-ops and anthropic.Anthropic() falls back to os.environ. load_dotenv
+# never overrides an already-set environment variable.
 load_dotenv(Path(__file__).resolve().parents[3] / ".env")
 
 router = APIRouter()
