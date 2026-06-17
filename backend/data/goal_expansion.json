@@ -1,0 +1,64 @@
+{
+  "_meta": {
+    "purpose": "Goal-expansion pack for the Vitamin Advisor 'Build my plan' flow. Adds 7 consumer-recognizable goals (weighted to Vitamin Shoppe's core sports-nutrition + wellness categories) plus the supplement entities and cited recommendation rules they require, so none of the new goal chips are dead buttons.",
+    "citation_discipline": "Every recommendation rule carries a real source (ISSN position stands, NIH ODS, NCCIH) and an honest evidence grade. These are structure/function recommendations, not treatment claims — the app's DSHEA disclaimer applies. Verify each source_ref against the live source before any non-demo use, same as the seed.",
+    "id_normalization_note": "The merged DB mixes underscore ids (seed: l_theanine, fish_oil) and hyphen ids (expansion: green-tea-extract, red-yeast-rice). Before merging, map every entity_id below to the canonical id that actually exists in app.db; CC handled this normalization during the expansion merge, so reuse that mapping.",
+    "frontend_note": "The 'goal_chips' list below is FRONTEND config (the GOALS array in App.jsx), not a DB table. Each chip's id MUST equal the survey_rule trigger_value so the recommendation fires. Everything else (entities, interaction_pairs, survey_rules) merges into the data via load_seed.",
+    "evidence_grade_scale": "A=strong (multiple RCTs/position stand), B=good, C=unclear/modest, D=mechanism/theoretical"
+  },
+
+  "goal_chips": [
+    {"id": "muscle_gain", "label": "Muscle gain"},
+    {"id": "weight_loss", "label": "Weight management"},
+    {"id": "performance", "label": "Athletic performance"},
+    {"id": "focus", "label": "Focus & cognition"},
+    {"id": "stress", "label": "Stress & mood"},
+    {"id": "beauty", "label": "Skin, hair & nails"},
+    {"id": "digestion", "label": "Digestion & gut"}
+  ],
+
+  "new_entities": [
+    {"entity_id": "whey_protein", "canonical_name": "Whey Protein", "entity_type": "supplement", "aka": ["whey", "whey isolate", "whey concentrate", "protein powder"], "category": "protein", "dose_low": 20, "dose_high": 40, "dose_unit": "g", "forms": ["powder"], "tags": [], "note": "Minimal drug interactions; very high protein intake can modestly affect levothyroxine timing."},
+    {"entity_id": "plant_protein", "canonical_name": "Plant Protein", "entity_type": "supplement", "aka": ["pea protein", "rice protein", "vegan protein"], "category": "protein", "dose_low": 20, "dose_high": 40, "dose_unit": "g", "forms": ["powder"], "tags": []},
+    {"entity_id": "beta_alanine", "canonical_name": "Beta-Alanine", "entity_type": "supplement", "aka": ["beta alanine"], "category": "sports-nutrition", "dose_low": 2, "dose_high": 5, "dose_unit": "g", "forms": ["powder", "capsule"], "tags": [], "note": "Harmless paresthesia (tingling) is the only common effect; no significant drug interactions."},
+    {"entity_id": "citrulline", "canonical_name": "L-Citrulline", "entity_type": "supplement", "aka": ["citrulline", "citrulline malate"], "category": "sports-nutrition", "dose_low": 6, "dose_high": 8, "dose_unit": "g", "forms": ["powder", "capsule"], "tags": [{"tag": "hypotensive", "role": "effector", "note": "NO-mediated vasodilation, mild; inherits the hypotensive additive logic (ED drugs, antihypertensives)"}]},
+    {"entity_id": "psyllium", "canonical_name": "Psyllium Fiber", "entity_type": "supplement", "aka": ["psyllium husk", "fiber", "Metamucil", "soluble fiber"], "category": "digestive", "dose_low": 5, "dose_high": 10, "dose_unit": "g", "forms": ["powder", "capsule"], "tags": [], "note": "Soluble fiber can reduce absorption of co-administered oral drugs — handled via the timing rule below."}
+  ],
+
+  "new_interaction_pairs": [
+    {"rule_id": "citrulline_sildenafil", "agent_a": "citrulline", "agent_b": "sildenafil", "interaction_type": "pd-additive", "severity": "moderate", "mechanism": "Both enhance NO/vasodilation → additive hypotension", "is_true_contraindication": false, "evidence_grade": "D", "evidence_type": "mechanism", "source_name": "Same NO-pathway rationale as L-arginine + PDE5 inhibitors", "source_ref": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1884955/", "management_text": "Monitor for dizziness/low blood pressure when combining citrulline with ED medications."},
+    {"rule_id": "psyllium_levothyroxine", "agent_a": "psyllium", "agent_b": "levothyroxine", "interaction_type": "timing-spacing", "severity": "timing-only", "mechanism": "Soluble fiber binds and slows absorption of oral medications", "is_true_contraindication": false, "spacing_hours": 2, "evidence_grade": "C", "evidence_type": "cohort", "source_name": "NIH ODS / fiber-drug absorption guidance", "source_ref": "https://ods.od.nih.gov/", "management_text": "Take psyllium and oral medications at least 2 hours apart."}
+  ],
+
+  "new_survey_rules": [
+    {"sr_id": "goal_muscle_creatine", "trigger_field": "goal", "trigger_value": "muscle_gain", "action": "recommend", "target_entity": "creatine", "rationale": "Creatine monohydrate is the most evidence-backed supplement for strength and lean-mass gains.", "evidence_grade": "A", "source_ref": "https://jissn.biomedcentral.com/articles/10.1186/s12970-017-0173-z"},
+    {"sr_id": "goal_muscle_whey", "trigger_field": "goal", "trigger_value": "muscle_gain", "action": "recommend", "target_entity": "whey_protein", "rationale": "Adequate protein intake is required for muscle protein synthesis; whey is rapidly absorbed.", "evidence_grade": "A", "source_ref": "https://jissn.biomedcentral.com/articles/10.1186/s12970-017-0177-8"},
+    {"sr_id": "goal_muscle_plant", "trigger_field": "goal", "trigger_value": "muscle_gain", "action": "recommend", "target_entity": "plant_protein", "rationale": "Plant protein option for vegetarian/vegan muscle-building diets.", "evidence_grade": "B", "source_ref": "https://jissn.biomedcentral.com/articles/10.1186/s12970-017-0177-8"},
+
+    {"sr_id": "goal_weight_whey", "trigger_field": "goal", "trigger_value": "weight_loss", "action": "recommend", "target_entity": "whey_protein", "rationale": "Higher protein intake supports satiety and preservation of lean mass during weight management.", "evidence_grade": "B", "source_ref": "https://jissn.biomedcentral.com/articles/10.1186/s12970-017-0177-8"},
+    {"sr_id": "goal_weight_fiber", "trigger_field": "goal", "trigger_value": "weight_loss", "action": "recommend", "target_entity": "psyllium", "rationale": "Soluble fiber promotes fullness and supports healthy weight management.", "evidence_grade": "B", "source_ref": "https://ods.od.nih.gov/factsheets/WeightLoss-HealthProfessional/"},
+    {"sr_id": "goal_weight_greentea", "trigger_field": "goal", "trigger_value": "weight_loss", "action": "recommend", "target_entity": "green-tea-extract", "rationale": "Green tea catechins are associated with modest effects on weight; evidence is limited.", "evidence_grade": "C", "source_ref": "https://ods.od.nih.gov/factsheets/WeightLoss-HealthProfessional/"},
+    {"sr_id": "goal_weight_berberine", "trigger_field": "goal", "trigger_value": "weight_loss", "action": "recommend", "target_entity": "berberine", "rationale": "Berberine supports metabolic/glucose pathways; monitor with diabetes medications.", "evidence_grade": "B", "source_ref": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9709280/"},
+
+    {"sr_id": "goal_perf_creatine", "trigger_field": "goal", "trigger_value": "performance", "action": "recommend", "target_entity": "creatine", "rationale": "Creatine improves high-intensity and repeated-effort performance.", "evidence_grade": "A", "source_ref": "https://jissn.biomedcentral.com/articles/10.1186/s12970-017-0173-z"},
+    {"sr_id": "goal_perf_betaalanine", "trigger_field": "goal", "trigger_value": "performance", "action": "recommend", "target_entity": "beta_alanine", "rationale": "Beta-alanine buffers muscle acidity, aiding 1–4 minute high-intensity efforts.", "evidence_grade": "B", "source_ref": "https://jissn.biomedcentral.com/articles/10.1186/s12970-015-0090-y"},
+    {"sr_id": "goal_perf_citrulline", "trigger_field": "goal", "trigger_value": "performance", "action": "recommend", "target_entity": "citrulline", "rationale": "Citrulline may support blood flow and reduce fatigue during training.", "evidence_grade": "B", "source_ref": "https://pubmed.ncbi.nlm.nih.gov/28177706/"},
+    {"sr_id": "goal_perf_caffeine", "trigger_field": "goal", "trigger_value": "performance", "action": "recommend", "target_entity": "caffeine", "rationale": "Caffeine is a well-established ergogenic aid for endurance and power.", "evidence_grade": "A", "source_ref": "https://jissn.biomedcentral.com/articles/10.1186/s12970-020-00383-4"},
+
+    {"sr_id": "goal_focus_theanine", "trigger_field": "goal", "trigger_value": "focus", "action": "recommend", "target_entity": "l_theanine", "rationale": "L-theanine promotes calm focus and pairs well with caffeine.", "evidence_grade": "B", "source_ref": "https://www.nccih.nih.gov/health/green-tea"},
+    {"sr_id": "goal_focus_omega", "trigger_field": "goal", "trigger_value": "focus", "action": "recommend", "target_entity": "fish_oil", "rationale": "Omega-3 DHA supports brain and cognitive health.", "evidence_grade": "B", "source_ref": "https://www.nccih.nih.gov/health/omega3-supplements-in-depth"},
+    {"sr_id": "goal_focus_caffeine", "trigger_field": "goal", "trigger_value": "focus", "action": "recommend", "target_entity": "caffeine", "rationale": "Caffeine improves alertness and attention.", "evidence_grade": "B", "source_ref": "https://jissn.biomedcentral.com/articles/10.1186/s12970-020-00383-4"},
+
+    {"sr_id": "goal_stress_ashwagandha", "trigger_field": "goal", "trigger_value": "stress", "action": "recommend", "target_entity": "ashwagandha", "rationale": "Ashwagandha is an adaptogen studied for stress and cortisol.", "evidence_grade": "B", "source_ref": "https://www.nccih.nih.gov/health/ashwagandha"},
+    {"sr_id": "goal_stress_magnesium", "trigger_field": "goal", "trigger_value": "stress", "action": "recommend", "target_entity": "magnesium", "rationale": "Magnesium supports relaxation and a calm nervous system.", "evidence_grade": "C", "source_ref": "https://ods.od.nih.gov/factsheets/Magnesium-HealthProfessional/"},
+    {"sr_id": "goal_stress_theanine", "trigger_field": "goal", "trigger_value": "stress", "action": "recommend", "target_entity": "l_theanine", "rationale": "L-theanine promotes relaxation without sedation.", "evidence_grade": "B", "source_ref": "https://www.nccih.nih.gov/health/green-tea"},
+
+    {"sr_id": "goal_beauty_collagen", "trigger_field": "goal", "trigger_value": "beauty", "action": "recommend", "target_entity": "collagen", "rationale": "Collagen peptides are studied for skin elasticity and hydration.", "evidence_grade": "B", "source_ref": "https://pubmed.ncbi.nlm.nih.gov/30681787/"},
+    {"sr_id": "goal_beauty_biotin", "trigger_field": "goal", "trigger_value": "beauty", "action": "recommend", "target_entity": "biotin", "rationale": "Biotin supports hair and nails; benefit is clearest in those who are deficient.", "evidence_grade": "C", "source_ref": "https://ods.od.nih.gov/factsheets/Biotin-HealthProfessional/"},
+    {"sr_id": "goal_beauty_vitc", "trigger_field": "goal", "trigger_value": "beauty", "action": "recommend", "target_entity": "vitamin_c", "rationale": "Vitamin C is required for collagen synthesis and skin health.", "evidence_grade": "B", "source_ref": "https://ods.od.nih.gov/factsheets/VitaminC-HealthProfessional/"},
+
+    {"sr_id": "goal_digest_probiotic", "trigger_field": "goal", "trigger_value": "digestion", "action": "recommend", "target_entity": "probiotic", "rationale": "Probiotics support gut microbiome balance and digestive comfort.", "evidence_grade": "B", "source_ref": "https://www.nccih.nih.gov/health/probiotics-what-you-need-to-know"},
+    {"sr_id": "goal_digest_fiber", "trigger_field": "goal", "trigger_value": "digestion", "action": "recommend", "target_entity": "psyllium", "rationale": "Soluble fiber supports regularity and digestive health.", "evidence_grade": "B", "source_ref": "https://ods.od.nih.gov/"},
+    {"sr_id": "goal_digest_magnesium", "trigger_field": "goal", "trigger_value": "digestion", "action": "recommend", "target_entity": "magnesium", "rationale": "Magnesium supports bowel regularity.", "evidence_grade": "C", "source_ref": "https://ods.od.nih.gov/factsheets/Magnesium-HealthProfessional/"}
+  ]
+}

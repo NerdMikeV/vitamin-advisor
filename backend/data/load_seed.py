@@ -35,6 +35,7 @@ from app.db import init_db, DB_PATH
 DATA_DIR = Path(__file__).resolve().parent
 SEED_PATH = DATA_DIR / "seed_data.json"
 EXPANSION_PATH = DATA_DIR / "expansion_data.json"
+GOAL_PATH = DATA_DIR / "goal_expansion.json"
 
 # Non-entity tokens that survey_rule.target_entity may legitimately reference
 # (handled as advisory gates, not entity foreign keys).
@@ -67,6 +68,15 @@ def build_dataset() -> tuple[dict, dict]:
     """Return (dataset, report). dataset has the five merged lists + vocab."""
     seed = json.loads(SEED_PATH.read_text())
     exp = json.loads(EXPANSION_PATH.read_text()) if EXPANSION_PATH.exists() else {}
+
+    # Fold the goal-expansion pack into the same merge/validate machinery: its
+    # entities/pairs/survey rules ride the existing alias, dedup, and FK paths.
+    if GOAL_PATH.exists():
+        goal = json.loads(GOAL_PATH.read_text())
+        exp.setdefault("entities", []).extend(goal.get("new_entities", []))
+        exp.setdefault("interaction_pairs", []).extend(goal.get("new_interaction_pairs", []))
+        exp.setdefault("survey_rules", []).extend(goal.get("new_survey_rules", []))
+
     report = {"unknown_tags": [], "unresolved_pair_fks": [], "deduped_pairs": [],
               "deduped_additive": [], "deduped_modifiers": [],
               "survey_target_issues": [], "aka_extension_misses": []}

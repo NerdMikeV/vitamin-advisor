@@ -10,6 +10,14 @@ const GOALS = [
   { id: 'heart', label: 'Heart health' },
   { id: 'joint', label: 'Joint support' },
   { id: 'immunity', label: 'Immunity' },
+  // Goal-expansion chips — id must equal the survey_rule trigger_value.
+  { id: 'muscle_gain', label: 'Muscle gain' },
+  { id: 'weight_loss', label: 'Weight management' },
+  { id: 'performance', label: 'Athletic performance' },
+  { id: 'focus', label: 'Focus & cognition' },
+  { id: 'stress', label: 'Stress & mood' },
+  { id: 'beauty', label: 'Skin, hair & nails' },
+  { id: 'digestion', label: 'Digestion & gut' },
 ]
 
 const PROFILE_FLAGS = [
